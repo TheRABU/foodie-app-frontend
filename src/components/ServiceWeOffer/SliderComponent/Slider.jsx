@@ -4,6 +4,7 @@ import "swiper/css/effect-cards";
 import { EffectCards } from "swiper/modules";
 import PropTypes from "prop-types";
 import "./nestedSlider.css";
+
 const Slider = ({ images }) => {
   return (
     <>
@@ -15,14 +16,19 @@ const Slider = ({ images }) => {
         style={{ height: "320px", maxWidth: "240px" }}
       >
         {images.map((image, index) => (
-          <SwiperSlide key={index}>
-            <img src={image.src} alt={image.alt || `Slide ${index + 1}`} />
+          <SwiperSlide key={index} className="rounded-xl">
+            <img
+              src={image.src}
+              alt={image.alt || `Slide ${index + 1}`}
+              className="slide-image"
+            />
           </SwiperSlide>
         ))}
       </Swiper>
     </>
   );
 };
+
 Slider.propTypes = {
   images: PropTypes.arrayOf(
     PropTypes.shape({

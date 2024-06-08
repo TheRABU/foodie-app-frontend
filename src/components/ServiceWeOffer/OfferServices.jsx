@@ -23,7 +23,7 @@ const OfferServices = () => {
       src: "https://www.tbsnews.net/sites/default/files/styles/big_3/public/images/2024/03/12/nagad_new_logo_1_0.jpg",
     },
   ];
-  const restaurentImages = [
+  const restaurantImages = [
     {
       src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
@@ -58,7 +58,7 @@ const OfferServices = () => {
           </div>
           <div className="flex flex-col rounded-xl overflow-hidden shadow-xl lg:flex-row-reverse">
             <div className="w-3/6 my-6">
-              <Slider images={restaurentImages} />
+              <Slider images={restaurantImages} />
             </div>
 
             <div className="flex flex-col justify-center flex-1 p-6 bg-white dark:bg-gray-50">
