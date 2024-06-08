@@ -52,7 +52,7 @@ const Questions = () => {
     },
   ];
   return (
-    <section className="bg-transparent text-gray-100 dark:text-gray-800 px-20">
+    <section className="bg-transparent text-gray-100 dark:text-gray-800 px-0 md:px-20">
       <div className="container  flex flex-col justify-center px-4 py-8 mx-auto md:p-8">
         <h2 className="text-4xl  font-semibold sm:text-4xl">
           Explore options near me
@@ -63,37 +63,34 @@ const Questions = () => {
             <summary className="px-4 py-6 text-xl focus:outline-none focus-visible:ring-violet-400 focus-visible:dark:ring-violet-600">
               Popular Cuisines near me?
             </summary>
-            <p className="px-4 py-6 pt-0 ml-4 -mt-4 text-gray-400 dark:text-gray-600">
-              <ul>
-                <li>Rater Dhaka</li>
-                <li>Pasta State</li>
-                <li>Gorom Bhaat</li>
-              </ul>
-            </p>
+
+            <ul className="px-4 py-6 pt-0 ml-4 -mt-4 text-gray-400 dark:text-gray-600">
+              <li>Rater Dhaka</li>
+              <li>Pasta State</li>
+              <li>Gorom Bhaat</li>
+            </ul>
           </details>
           <details className="w-full border rounded-lg">
             <summary className="px-4 text-xl py-6 focus:outline-none focus-visible:ring-violet-400 focus-visible:dark:ring-violet-600">
               Popular restaurants type near me?
             </summary>
-            <p className="px-4 py-6 pt-0 ml-4 -mt-4 text-gray-400 dark:text-gray-600">
-              <ul>
-                <li>Mexican Chilli Chicken</li>
-                <li>Uradhura CXhef</li>
-                <li>Kacchi vabi</li>
-              </ul>
-            </p>
+
+            <ul className="px-4 py-6 pt-0 ml-4 -mt-4 text-gray-400 dark:text-gray-600">
+              <li>Mexican Chilli Chicken</li>
+              <li>Uradhura CXhef</li>
+              <li>Kacchi vabi</li>
+            </ul>
           </details>
           <details className="w-full border rounded-lg">
             <summary className="px-4 text-xl py-6 focus:outline-none focus-visible:ring-violet-400 focus-visible:dark:ring-violet-600">
               What cities we deliver to?
             </summary>
-            <p className="px-4 py-6 pt-0 ml-4 -mt-4 text-gray-400 dark:text-gray-600">
-              <ul>
-                {cityList.map((city, idx) => (
-                  <li key={idx}>{city.city}</li>
-                ))}
-              </ul>
-            </p>
+
+            <ul className="px-4 py-6 pt-0 ml-4 -mt-4 text-gray-400 dark:text-gray-600">
+              {cityList.map((city, idx) => (
+                <li key={idx}>{city.city}</li>
+              ))}
+            </ul>
           </details>
         </div>
       </div>

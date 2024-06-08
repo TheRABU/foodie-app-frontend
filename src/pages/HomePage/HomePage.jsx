@@ -8,7 +8,7 @@ import TopFoodSection from "../../components/TopFoodSection/TopFoodSection";
 const HomePage = () => {
   return (
     <>
-      <div className="py-10 bg-white">
+      <div className="my-10">
         <Banner />
       </div>
       <div className="my-10">
@@ -17,14 +17,15 @@ const HomePage = () => {
       <div className="mx-auto">
         <Questions />
       </div>
-      <div className="mx-auto px-28">
+
+      <div className="mx-auto px-0 md:px-28">
         <Testimonial />
-      </div>
-      <div className="mx-auto px-20 py-20">
-        <Team />
       </div>
       <div className="mx-auto px-28 bg-white py-20">
         <OfferServices />
+      </div>
+      <div className="mx-auto px-20 py-20">
+        <Team />
       </div>
     </>
   );
