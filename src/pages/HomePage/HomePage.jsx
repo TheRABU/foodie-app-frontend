@@ -23,6 +23,7 @@ const HomePage = () => {
       <div className="mx-auto px-5 md:px-28 bg-white ">
         <OfferServices />
       </div>
+
       <div className="mx-auto px-8 md:px-20">
         <Team />
       </div>
