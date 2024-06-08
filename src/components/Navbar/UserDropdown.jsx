@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const UserDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,56 +25,40 @@ const UserDropdown = () => {
           className="absolute right-0 z-20 w-48 py-2 mt-2 origin-top-right bg-white rounded-md shadow-xl"
           onMouseLeave={() => setIsOpen(false)}
         >
-          <a
+          <Link
             href="#"
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform hover:bg-gray-100"
           >
-            View Profile
-          </a>
-          <a
+            My added food items
+          </Link>
+          <Link
             href="#"
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform hover:bg-gray-100"
           >
-            Settings
-          </a>
-          <a
+            Add a food item
+          </Link>
+          <Link
             href="#"
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform hover:bg-gray-100"
           >
-            Keyboard Shortcuts
-          </a>
+            My ordered food item
+          </Link>
           <hr className="border-gray-200" />
-          <a
+          <Link
             href="#"
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform hover:bg-gray-100"
           >
-            Company Profile
-          </a>
-          <a
-            href="#"
-            className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform hover:bg-gray-100"
-          >
-            Team
-          </a>
-          <a
-            href="#"
-            className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform hover:bg-gray-100"
-          >
-            Invite Colleagues
-          </a>
+            Dashboard
+          </Link>
+
           <hr className="border-gray-200" />
-          <a
-            href="#"
-            className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform hover:bg-gray-100"
-          >
-            Help
-          </a>
-          <a
+
+          <Link
             href="#"
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform hover:bg-gray-100"
           >
             Sign Out
-          </a>
+          </Link>
         </div>
       )}
     </div>
