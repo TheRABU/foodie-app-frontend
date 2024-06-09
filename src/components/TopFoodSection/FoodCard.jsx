@@ -13,13 +13,16 @@ const FoodCard = ({ food }) => {
   } = food;
   return (
     <div className="w-full max-w-xs flex-1  overflow-hidden bg-white rounded-lg shadow-2xl">
-      <div className="cursor-pointer">
-        <img
-          className="object-cover w-full h-56"
-          src={FoodImage}
-          alt="avatar"
-        />
-      </div>
+      <Link to={`/single-food/${_id}`}>
+        <div className="cursor-pointer">
+          <img
+            className="object-cover w-full h-56"
+            src={FoodImage}
+            alt="avatar"
+          />
+        </div>
+      </Link>
+
       <div className="p-2">
         <div className="py-2 flex justify-between">
           <a
@@ -40,9 +43,12 @@ const FoodCard = ({ food }) => {
           </span>
         </div>
         <div className="flex justify-between">
-          <button className="btn rounded-3xl bg-red-600 hover:bg-yellow-400 text-white font-semibold">
-            Order Now
-          </button>
+          <Link to={`/purchase/${_id}`}>
+            <button className="btn rounded-3xl bg-red-600 hover:bg-yellow-400 text-white font-semibold">
+              Order Now
+            </button>
+          </Link>
+
           <Link to={`/single-food/${_id}`}>
             <button className="btn rounded-lg bg-blue-600 hover:bg-indigo-700 text-white font-semibold">
               View Details

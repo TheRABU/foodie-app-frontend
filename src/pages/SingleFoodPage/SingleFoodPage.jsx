@@ -26,15 +26,15 @@ const SingleFoodPage = () => {
                 <img
                   className="object-cover object-center w-full h-80 xl:h-[28rem] rounded-xl"
                   src={FoodImage}
-                  alt=""
+                  alt="food image"
                 />
 
                 <div>
                   <h1 className="max-w-lg mt-4 text-2xl font-semibold leading-tight text-gray-800 ">
                     {FoodName}
                   </h1>
-
-                  <div className="flex items-center mt-6">
+                  {/* Problematic div in mobile device */}
+                  <div className="flex-row md:flex items-center mt-6">
                     <div className="hidden md:flex">
                       <img
                         className="object-cover object-center w-10 h-10 rounded-full"
@@ -43,11 +43,14 @@ const SingleFoodPage = () => {
                       />
                     </div>
 
-                    <div className="mx-0 md:mx-4 tooltip" data-tip="Review">
+                    <div className="mx-0 py-3 md:mx-4 ">
                       <p className="text-sm text-gray-500 ">Made By</p>
                       <h1 className="text-sm text-gray-700 ">{MadeBy}</h1>
                     </div>
-                    <div className="mx-0 md:mx-5">
+                    <div
+                      className="mx-0 py-3 md:mx-5 tooltip"
+                      data-tip="Review"
+                    >
                       <button
                         className="btn"
                         onClick={() =>
@@ -58,7 +61,7 @@ const SingleFoodPage = () => {
                       </button>
                       <dialog
                         id="my_modal_5"
-                        className="modal modal-bottom sm:modal-middle"
+                        className="modal modal-bottom px-3 sm:modal-middle"
                       >
                         <div className="modal-box">
                           <form>
@@ -97,9 +100,7 @@ const SingleFoodPage = () => {
                         </div>
                       </dialog>
                     </div>
-                    <div className="flex items-center gap-x-3">
-                      <span>Quantity</span>
-                      <button className="btn btn-square">{Quantity}</button>
+                    <div className="flex-row mr-3 flex-1 md:flex items-center lg:gap-x-3">
                       <Link
                         to={`/purchase/${_id}`}
                         className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
@@ -137,7 +138,10 @@ const SingleFoodPage = () => {
                 </div>
 
                 <hr className="my-6 border-gray-200 " />
-
+                <div>
+                  <span>Quantity {Quantity}</span>
+                </div>
+                <hr />
                 <div className="">
                   <h3 className="text-blue-500 capitalize ml-2">Price</h3>
                   <span className="badge badge-info text-white font-semibold">
