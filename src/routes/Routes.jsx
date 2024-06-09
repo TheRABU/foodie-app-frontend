@@ -4,6 +4,8 @@ import HomePage from "../pages/HomePage/HomePage";
 import AllFoods from "../pages/AllFoodPage/AllFoods";
 import SingleFoodPage from "../pages/SingleFoodPage/SingleFoodPage";
 import PurchaseNowPage from "../pages/FoodPurchasePage/PurchaseNowPage";
+import SignUp from "../pages/SignUpPage/SignUp";
+import LogIn from "../pages/LoginPage/LogIn";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +32,14 @@ export const router = createBrowserRouter([
         element: <PurchaseNowPage />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/api/foods/${params.id}`),
+      },
+      {
+        path: "/sign-up",
+        element: <SignUp />,
+      },
+      {
+        path: "/login",
+        element: <LogIn />,
       },
     ],
   },

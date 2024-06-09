@@ -83,6 +83,12 @@ const NavBar = () => {
                 >
                   Gallery
                 </Link>
+                <Link
+                  to="/sign-up"
+                  className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-gray-100 hover:text-red-600"
+                >
+                  Sign Up
+                </Link>
               </div>
 
               <div className="flex items-center mt-4 lg:mt-0">
