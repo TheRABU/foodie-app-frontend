@@ -62,6 +62,7 @@ const AllFoods = () => {
                   id="query"
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
+
                 <button
                   type="submit"
                   onClick={handleSearch}

@@ -3,6 +3,7 @@ import MainLayout from "../layouts/MainLayout";
 import HomePage from "../pages/HomePage/HomePage";
 import AllFoods from "../pages/AllFoodPage/AllFoods";
 import SingleFoodPage from "../pages/SingleFoodPage/SingleFoodPage";
+import PurchaseNowPage from "../pages/FoodPurchasePage/PurchaseNowPage";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,12 @@ export const router = createBrowserRouter([
       {
         path: "/single-food/:id",
         element: <SingleFoodPage />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/api/foods/${params.id}`),
+      },
+      {
+        path: "/purchase/:id",
+        element: <PurchaseNowPage />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/api/foods/${params.id}`),
       },
