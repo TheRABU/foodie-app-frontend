@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const FoodCard = ({ food }) => {
   const {
     FoodName,
@@ -7,6 +9,7 @@ const FoodCard = ({ food }) => {
     MadeBy,
     FoodOrigin,
     Description,
+    _id,
   } = food;
   return (
     <div className="w-full max-w-xs flex-1  overflow-hidden bg-white rounded-lg shadow-2xl">
@@ -40,9 +43,11 @@ const FoodCard = ({ food }) => {
           <button className="btn rounded-3xl bg-red-600 hover:bg-yellow-400 text-white font-semibold">
             Order Now
           </button>
-          <button className="btn rounded-lg bg-blue-600 hover:bg-indigo-700 text-white font-semibold">
-            View Details
-          </button>
+          <Link to={`/single-food/${_id}`}>
+            <button className="btn rounded-lg bg-blue-600 hover:bg-indigo-700 text-white font-semibold">
+              View Details
+            </button>
+          </Link>
         </div>
       </div>
     </div>

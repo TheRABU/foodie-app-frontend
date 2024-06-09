@@ -1,5 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
-
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import axios from "axios";
 const SearchBar = () => {
@@ -79,11 +78,7 @@ const SearchBar = () => {
           </div>
         </form>
       </div>
-      {isLoading && (
-        <div className="text-center">
-          <span className="text-5xl loading loading-bars loading-lg"></span>
-        </div>
-      )}
+      {isLoading && <div>Loading...</div>}
       {error && <div>Error occurred: {error.message}</div>}
     </>
   );

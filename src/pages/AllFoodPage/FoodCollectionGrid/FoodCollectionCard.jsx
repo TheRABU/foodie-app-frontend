@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 const FoodCollectionCard = ({ food }) => {
-  const { FoodName, FoodImage, FoodCategory, Price } = food;
+  const { FoodName, FoodImage, FoodCategory, Price, _id } = food;
   return (
     <>
       <div className="w-full h-full max-w-xs flex-1  overflow-hidden bg-white rounded-lg shadow-2xl">
@@ -34,9 +35,11 @@ const FoodCollectionCard = ({ food }) => {
             <button className="btn rounded-3xl bg-red-600 hover:bg-yellow-400 text-white font-semibold">
               Order Now
             </button>
-            <button className="btn rounded-lg bg-blue-600 hover:bg-indigo-700 text-white font-semibold">
-              View Details
-            </button>
+            <Link to={`/single-food/${_id}`}>
+              <button className="btn rounded-lg bg-blue-600 hover:bg-indigo-700 text-white font-semibold">
+                View Details
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -49,6 +52,7 @@ FoodCollectionCard.propTypes = {
     FoodImage: PropTypes.string.isRequired,
     FoodCategory: PropTypes.string.isRequired,
     Price: PropTypes.number.isRequired,
+    _id: PropTypes.string.isRequired,
   }).isRequired,
 };
 export default FoodCollectionCard;
