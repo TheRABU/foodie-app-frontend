@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
       {
         path: "/all-foods",
         element: <AllFoods />,
-        loader: () => fetch("http://localhost:5000/foods"),
+        loader: () => fetch("http://localhost:5000/api/foods"),
       },
     ],
   },

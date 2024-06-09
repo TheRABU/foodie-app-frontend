@@ -1,18 +1,28 @@
-import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
+import { useEffect, useState } from "react";
+import axios from "axios";
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [filteredFoods, setFilteredFoods] = useState([]);
-
-  const handleSearchBtn = (e) => {
-    e.preventDefault();
-    const search = e.target.search.value;
-    console.log(search);
-  };
+  // const [data, isLoading, errpr] = useQuery({
+  //   queryKey: ["search", searchValue],
+  //   queryFn: async () => {
+  //     return fetch(`https://dummyjson.com/products/search?q=${searchValue}`)
+  //       .then((res) => res.json())
+  //       .then(console.log);
+  //   },
+  // });
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["foods", searchValue],
+    queryFn: async () => {
+      const response = await axios.get(`/api/foods?search=${searchValue}`);
+      return response.data;
+    },
+  });
   return (
     <>
       <div className="my-20">
-        <form onSubmit={handleSearchBtn}>
+        <form onSubmit={(e) => e.preventDefault()}>
           {/* <label className="input input-bordered flex items-center gap-2">
             <input
               type="text"
@@ -44,6 +54,7 @@ const SearchBar = () => {
               type="text"
               name="query"
               id="query"
+              onChange={(e) => setSearchValue(e.target.value)}
             />
             <button
               type="submit"
@@ -68,6 +79,12 @@ const SearchBar = () => {
           </div>
         </form>
       </div>
+      {isLoading && (
+        <div className="text-center">
+          <span className="text-5xl loading loading-bars loading-lg"></span>
+        </div>
+      )}
+      {error && <div>Error occurred: {error.message}</div>}
     </>
   );
 };
