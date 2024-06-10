@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthenticateProvider";
-
+import Swal from "sweetalert2";
 const PurchaseNowPage = () => {
   const foodDetail = useLoaderData();
   const { FoodImage, FoodName, Quantity, Price } = foodDetail;
@@ -32,6 +32,13 @@ const PurchaseNowPage = () => {
       Price,
     };
     console.log(orderValue);
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "Order Confirmed",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   return (
@@ -66,7 +73,7 @@ const PurchaseNowPage = () => {
                 <h2 className="text-3xl font-semibold tracking-wide">
                   {FoodName}
                 </h2>
-                <p className="text-gray-100">{Price}</p>
+                <p className="text-gray-100">BDT {Price}</p>
                 <p className="text-gray-100">Left {Quantity}</p>
               </div>
 

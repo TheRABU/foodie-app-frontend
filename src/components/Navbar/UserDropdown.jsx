@@ -47,7 +47,7 @@ const UserDropdown = () => {
             My added food items
           </Link>
           <Link
-            href="#"
+            to="/add-gallery"
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform hover:bg-gray-100"
           >
             Add a food item

@@ -10,6 +10,9 @@ import PrivateRoutes from "./PrivateRoute";
 import MyDashBoard from "../pages/DashboardPage/MyDashBoard";
 import DashBoardLayout from "../layouts/DashBoardLayout";
 import ErrorPage from "../pages/404ErrorPage/ErrorPage";
+import OurGallery from "../pages/GalleryPage/OurGallery";
+import AddGalleryItem from "../pages/AddItemToGallery/AddGalleryItem";
+import MyAddedItems from "../pages/MyAddedFoodItemsPage/MyAddedItems";
 
 export const router = createBrowserRouter([
   {
@@ -50,10 +53,14 @@ export const router = createBrowserRouter([
         path: "/login",
         element: <LogIn />,
       },
+      {
+        path: "/gallery",
+        element: <OurGallery />,
+      },
     ],
   },
   {
-    path: "/dashboard",
+    path: "/",
     element: <DashBoardLayout />,
     errorElement: <ErrorPage />,
     children: [
@@ -62,6 +69,22 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <MyDashBoard />,
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/add-gallery",
+        element: (
+          <PrivateRoutes>
+            <AddGalleryItem />,
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/my-requests/:email",
+        element: (
+          <PrivateRoutes>
+            <MyAddedItems />
           </PrivateRoutes>
         ),
       },

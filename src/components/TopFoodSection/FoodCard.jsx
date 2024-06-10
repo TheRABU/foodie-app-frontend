@@ -12,7 +12,7 @@ const FoodCard = ({ food }) => {
     _id,
   } = food;
   return (
-    <div className="w-full max-w-xs flex-1  overflow-hidden bg-white rounded-lg shadow-2xl">
+    <div className="w-full max-w-xs flex-1  overflow-hidden bg-[#FEFBF6] rounded-lg shadow-2xl">
       <Link to={`/single-food/${_id}`}>
         <div className="cursor-pointer">
           <img
@@ -44,13 +44,13 @@ const FoodCard = ({ food }) => {
         </div>
         <div className="flex justify-between">
           <Link to={`/purchase/${_id}`}>
-            <button className="btn rounded-3xl bg-red-600 hover:bg-yellow-400 text-white font-semibold">
+            <button className="btn rounded-3xl bg-[#B70404] hover:bg-[#F9FBE7] text-white hover:text-[#040D12] font-semibold">
               Order Now
             </button>
           </Link>
 
           <Link to={`/single-food/${_id}`}>
-            <button className="btn rounded-lg bg-blue-600 hover:bg-indigo-700 text-white font-semibold">
+            <button className="btn rounded-lg bg-[#0D1282] hover:bg-indigo-700 text-white font-semibold">
               View Details
             </button>
           </Link>

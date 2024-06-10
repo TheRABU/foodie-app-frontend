@@ -45,9 +45,9 @@ const AllFoods = () => {
 
   return (
     <>
-      <div className="h-full py-10 bg-slate-200">
+      <div className="h-full py-10 bg-[#F9F5EB]">
         <h2 className="text-center text-7xl font-bold text-black">
-          All <span className="text-red-500">foods</span>
+          All <span className="text-[#FF004D]">foods</span>
         </h2>
 
         <div className="px-5 lg:px-28 w-full lg:max-w-screen mx-auto">

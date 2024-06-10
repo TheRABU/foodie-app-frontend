@@ -14,7 +14,7 @@ const PrivateRoutes = ({ children }) => {
           alt="Loading icon"
         />
       </div>;
-    }, 300);
+    }, 1000);
   }
   if (user) {
     return children;

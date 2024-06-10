@@ -76,7 +76,7 @@ const SignUp = () => {
     createUser(email, password)
       .then(() => {
         Swal.fire({
-          position: "top-right",
+          position: "top-center",
           icon: "success",
           title: "Registration Successful",
           showConfirmButton: false,

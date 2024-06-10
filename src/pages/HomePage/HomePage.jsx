@@ -8,7 +8,7 @@ import TopFoodSection from "../../components/TopFoodSection/TopFoodSection";
 const HomePage = () => {
   return (
     <>
-      <div className="py-10 bg-white">
+      <div className="py-10 bg-[#FFFFFF]">
         <Banner />
       </div>
       <div className="my-10">

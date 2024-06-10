@@ -8,12 +8,14 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="relative bg-white shadow">
+      <nav className="relative bg-[#FF204E] shadow">
         <div className="container px-6 py-4 mx-auto">
           <div className="lg:flex lg:items-center lg:justify-between">
             <div className="flex items-center justify-between">
               <Link to="/">
-                <h1 className="text-3xl text-red-600 font-bold">Foodie Bite</h1>
+                <h1 className="text-3xl text-[#F9FBE7] font-bold">
+                  Foodie Bite
+                </h1>
               </Link>
 
               {/* Mobile menu button */}
@@ -70,19 +72,19 @@ const NavBar = () => {
               <div className="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
                 <Link
                   to="/"
-                  className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-gray-100 hover:text-red-600"
+                  className="px-3 py-2 mx-3 mt-2 text-[#F9FBE7] transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-gray-100 hover:text-red-600"
                 >
                   Home
                 </Link>
                 <Link
                   to="/all-foods"
-                  className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-gray-100 hover:text-red-600"
+                  className="px-3 py-2 mx-3 mt-2 text-[#F9FBE7] transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-gray-100 hover:text-red-600"
                 >
                   All Foods
                 </Link>
                 <Link
-                  to="/feedback"
-                  className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-gray-100 hover:text-red-600"
+                  to="/gallery"
+                  className="px-3 py-2 mx-3 mt-2 text-[#F9FBE7] transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-gray-100 hover:text-red-600"
                 >
                   Gallery
                 </Link>
@@ -91,7 +93,7 @@ const NavBar = () => {
                 ) : (
                   <Link
                     to="/sign-up"
-                    className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-gray-100 hover:text-red-600"
+                    className="px-3 py-2 mx-3 mt-2 text-[#F9FBE7] transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-gray-100 hover:text-red-600"
                   >
                     Sign Up
                   </Link>
