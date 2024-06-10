@@ -6,15 +6,15 @@ const PrivateRoutes = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
   if (loading) {
-    return (
+    return setTimeout(() => {
       <div className="flex gap-4 p-4 flex-wrap justify-center">
         <img
           className="w-20 h-20 animate-spin"
           src="https://www.svgrepo.com/show/199956/loading-loader.svg"
           alt="Loading icon"
         />
-      </div>
-    );
+      </div>;
+    }, 300);
   }
   if (user) {
     return children;
