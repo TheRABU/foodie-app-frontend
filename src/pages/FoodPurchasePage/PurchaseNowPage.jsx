@@ -1,21 +1,52 @@
-import { useLoaderData } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthenticateProvider";
 
 const PurchaseNowPage = () => {
   const foodDetail = useLoaderData();
-  const { FoodName, Quantity, Price } = foodDetail;
+  const { FoodImage, FoodName, Quantity, Price } = foodDetail;
+  const { user } = useContext(AuthContext);
   return (
     <>
-      <div className="flex items-center justify-center p-12">
+      <div className="flex-row lg:flex items-center justify-center py-12 px-8">
+        <div>
+          <div className="mb-5 px-3 md:px-20">
+            <div className="card bg-base-100 shadow-2xl">
+              <figure className="px-10 pt-10">
+                <img src={FoodImage} alt="Food Image" className="rounded-xl" />
+              </figure>
+              <div className="card-body items-center text-center">
+                <h2 className="card-title">{FoodName}</h2>
+                <p>BDT {Price}</p>
+                <p>Available {Quantity}</p>
+                <Link to="/all-foods">
+                  <button className="btn mx-auto px-10 bg-violet-50">
+                    Browse more
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="mx-auto w-full max-w-[550px] bg-white">
           <form>
             <div className="mb-5">
-              <ul className="steps steps-vertical">
-                <li className="step step-primary">Food Name {FoodName}</li>
-                <li className="step step-primary">Available {Quantity}</li>
-                <li className="step">Price {Price}</li>
-              </ul>
+              <label
+                htmlFor="name"
+                className="mb-3 block text-base font-medium text-[#07074D]"
+              >
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                disabled={true}
+                defaultValue={user.displayName}
+                placeholder="Enter your Name"
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              />
             </div>
-            <hr className="h-10 w-full bg-black" />
             <div className="mb-5">
               <label
                 htmlFor="email"
@@ -27,6 +58,8 @@ const PurchaseNowPage = () => {
                 type="email"
                 name="email"
                 id="email"
+                disabled={true}
+                defaultValue={user.email}
                 placeholder="Enter your email"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />

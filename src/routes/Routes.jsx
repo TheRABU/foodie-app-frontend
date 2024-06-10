@@ -6,6 +6,7 @@ import SingleFoodPage from "../pages/SingleFoodPage/SingleFoodPage";
 import PurchaseNowPage from "../pages/FoodPurchasePage/PurchaseNowPage";
 import SignUp from "../pages/SignUpPage/SignUp";
 import LogIn from "../pages/LoginPage/LogIn";
+import PrivateRoutes from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +30,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/purchase/:id",
-        element: <PurchaseNowPage />,
+        element: (
+          <PrivateRoutes>
+            <PurchaseNowPage />,
+          </PrivateRoutes>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/api/foods/${params.id}`),
       },

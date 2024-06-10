@@ -33,10 +33,11 @@ const TopFoodSection = () => {
         ))}
       </div>
       <div className="text-center mt-8">
-        <Link to="/all-foods">
-          <button className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-300">
-            View More
-          </button>
+        <Link
+          to="/all-foods"
+          className="px-5 py-5 font-medium bg-blue-50 hover:bg-blue-100 hover:text-blue-600 text-blue-500 rounded-lg text-sm"
+        >
+          All foods
         </Link>
       </div>
     </>

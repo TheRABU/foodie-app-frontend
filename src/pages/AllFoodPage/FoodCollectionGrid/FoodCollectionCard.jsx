@@ -5,28 +5,26 @@ const FoodCollectionCard = ({ food }) => {
   return (
     <>
       <div className="w-full h-full max-w-xs flex-1  overflow-hidden bg-white rounded-lg shadow-2xl">
-        <div className="cursor-pointer">
-          <img
-            className="object-cover w-full h-56"
-            src={FoodImage}
-            alt="avatar"
-          />
-        </div>
-        <div className="p-2">
-          <div className="py-2 flex justify-between">
-            <a
-              href="#"
-              className="block text-xl font-bold text-gray-800"
-              tabIndex={0}
-              role="link"
-            >
-              {FoodName}
-            </a>
-            <div className="badge text-white font-semibold badge-accent">
-              BDT {Price}
-            </div>
+        <Link to={`/single-food/${_id}`}>
+          <div className="cursor-pointer">
+            <img
+              className="object-cover w-full h-56"
+              src={FoodImage}
+              alt="avatar"
+            />
           </div>
-          <div className="flex justify-between mb-2">
+        </Link>
+
+        <div className="p-2">
+          <div className="py-2 flex-grow justify-end">
+            <h1 className="block text-xl font-bold text-gray-800">
+              {FoodName}
+            </h1>
+            <span className="badge text-white font-semibold badge-accent">
+              BDT {Price}
+            </span>
+          </div>
+          <div className="flex-grow justify-between mb-2">
             <span className="text-md font-bold text-gray-700 ">
               Category: {FoodCategory}
             </span>

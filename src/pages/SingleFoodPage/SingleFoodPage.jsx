@@ -49,7 +49,7 @@ const SingleFoodPage = () => {
                     </div>
                     <div
                       className="mx-0 py-3 md:mx-5 tooltip"
-                      data-tip="Review"
+                      data-tip="Give Review"
                     >
                       <button
                         className="btn"
