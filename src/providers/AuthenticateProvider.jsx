@@ -39,7 +39,7 @@ const AuthProvider = ({ children }) => {
 
     return updateProfile(user, {
       displayName: name,
-      photoURL: "https://example.com/jane-q-user/profile.jpg",
+      photoURL: user.photoURL,
     })
       .then(() => {
         console.log("profile updated", user);

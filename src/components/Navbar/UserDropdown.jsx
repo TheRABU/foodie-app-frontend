@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthenticateProvider";
 
 const UserDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logOut } = useContext(AuthContext);
+
+  // handle logout
+  const handleLogOut = () => {
+    logOut().then().catch();
+  };
   return (
     <div className="relative inline-block">
       {/* Dropdown toggle button */}
@@ -11,11 +18,19 @@ const UserDropdown = () => {
         className="flex items-center focus:outline-none"
       >
         <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-          <img
-            src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-            className="object-cover w-full h-full"
-            alt="avatar"
-          />
+          {user?.photoURL ? (
+            <img
+              className="object-cover w-full h-full"
+              src={user.photoURL}
+              alt="user photo"
+            />
+          ) : (
+            <img
+              src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+              className="object-cover w-full h-full"
+              alt="avatar"
+            />
+          )}
         </div>
       </button>
 
@@ -54,7 +69,7 @@ const UserDropdown = () => {
           <hr className="border-gray-200" />
 
           <Link
-            href="#"
+            onClick={handleLogOut}
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform hover:bg-gray-100"
           >
             Sign Out
