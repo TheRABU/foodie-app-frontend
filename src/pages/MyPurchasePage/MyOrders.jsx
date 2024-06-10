@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthenticateProvider";
 import { useNavigate } from "react-router-dom";
 
-const MyDashBoard = () => {
+const MyOrders = () => {
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
   // handleLogout
@@ -13,12 +13,11 @@ const MyDashBoard = () => {
       })
       .catch();
   };
-
   return (
     <>
       <div className="flex-row md:flex justify-between h-full">
         {/* SIDEBAR */}
-        <div className="hidden md:block min-h-screen p-3 space-y-2 w-2/6 bg-[#1F2544] text-gray-100">
+        <div className="hidden md:block min-h-screen p-3 space-y-2 w-2/6 bg-gray-900 text-gray-100">
           <div className="flex items-center p-2 space-x-4">
             <img
               src={user?.photoURL}
@@ -163,72 +162,13 @@ const MyDashBoard = () => {
         </div>
         {/* RIGHT SIDE CONTENT */}
         <div className="w-full px-5 h-full bg-slate-300">
-          <h1 className="text-3xl text-center">My Orders</h1>
           <section className="grid grid-cols-3 gap-5">
-            <div className=" p-6 rounded-md shadow-md bg-gray-900 text-gray-50">
-              <img
-                src="https://source.unsplash.com/random/300x300/?1"
-                alt=""
-                className="object-cover object-center w-full rounded-md h-72 bg-gray-500"
-              />
-              <div className="mt-6 mb-2">
-                <span className="block text-xs font-medium tracking-widest uppercase text-violet-400">
-                  Quisque
-                </span>
-                <h2 className="text-xl font-semibold tracking-wide">
-                  Nam maximus purus
-                </h2>
-              </div>
-              <p className="text-gray-100">
-                Mauris et lorem at elit tristique dignissim et ullamcorper elit.
-                In sed feugiat mi. Etiam ut lacinia dui.
-              </p>
-            </div>
-            <div className=" p-6 rounded-md shadow-md bg-gray-900 text-gray-50">
-              <img
-                src="https://source.unsplash.com/random/300x300/?1"
-                alt=""
-                className="object-cover object-center w-full rounded-md h-72 bg-gray-500"
-              />
-              <div className="mt-6 mb-2">
-                <span className="block text-xs font-medium tracking-widest uppercase text-violet-400">
-                  Quisque
-                </span>
-                <h2 className="text-xl font-semibold tracking-wide">
-                  Nam maximus purus
-                </h2>
-              </div>
-              <p className="text-gray-100">
-                Mauris et lorem at elit tristique dignissim et ullamcorper elit.
-                In sed feugiat mi. Etiam ut lacinia dui.
-              </p>
-            </div>
-            <div className=" p-6 rounded-md shadow-md bg-gray-900 text-gray-50">
-              <img
-                src="https://source.unsplash.com/random/300x300/?1"
-                alt=""
-                className="object-cover object-center w-full rounded-md h-72 bg-gray-500"
-              />
-              <div className="mt-6 mb-2">
-                <span className="block text-xs font-medium tracking-widest uppercase text-violet-400">
-                  Quisque
-                </span>
-                <h2 className="text-xl font-semibold tracking-wide">
-                  Nam maximus purus
-                </h2>
-              </div>
-              <p className="text-gray-100">
-                Mauris et lorem at elit tristique dignissim et ullamcorper elit.
-                In sed feugiat mi. Etiam ut lacinia dui.
-              </p>
-            </div>
+            <h2 className="text-center text-3xl ">My Orders</h2>
           </section>
-          <h3 className="text-2xl text-center">Make a Custom Food Request</h3>
-          <section></section>
         </div>
       </div>
     </>
   );
 };
 
-export default MyDashBoard;
+export default MyOrders;

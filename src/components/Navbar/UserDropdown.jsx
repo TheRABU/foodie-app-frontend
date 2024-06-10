@@ -41,19 +41,19 @@ const UserDropdown = () => {
           onMouseLeave={() => setIsOpen(false)}
         >
           <Link
-            href="#"
+            to="/my-requests"
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform hover:bg-gray-100"
           >
             My added food items
           </Link>
           <Link
-            to="/add-gallery"
+            to="/request"
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform hover:bg-gray-100"
           >
             Add a food item
           </Link>
           <Link
-            href="#"
+            to="/my-orders"
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform hover:bg-gray-100"
           >
             My ordered food item

@@ -13,6 +13,7 @@ import ErrorPage from "../pages/404ErrorPage/ErrorPage";
 import OurGallery from "../pages/GalleryPage/OurGallery";
 import AddGalleryItem from "../pages/AddItemToGallery/AddGalleryItem";
 import MyAddedItems from "../pages/MyAddedFoodItemsPage/MyAddedItems";
+import MyOrders from "../pages/MyPurchasePage/MyOrders";
 
 export const router = createBrowserRouter([
   {
@@ -73,7 +74,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/add-gallery",
+        path: "/request",
         element: (
           <PrivateRoutes>
             <AddGalleryItem />,
@@ -81,10 +82,18 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/my-requests/:email",
+        path: "/my-requests",
         element: (
           <PrivateRoutes>
             <MyAddedItems />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/my-orders",
+        element: (
+          <PrivateRoutes>
+            <MyOrders />
           </PrivateRoutes>
         ),
       },
