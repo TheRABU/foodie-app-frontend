@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { MdOutlineReviews } from "react-icons/md";
+import { AuthContext } from "../../providers/AuthenticateProvider";
 const SingleFoodPage = () => {
+  const { user } = useContext(AuthContext);
   const foodData = useLoaderData();
   const [singleFood, setSingleFood] = useState(foodData);
   const {
@@ -15,6 +17,14 @@ const SingleFoodPage = () => {
     Description,
     Quantity,
   } = singleFood;
+
+  // post review
+  const addReview = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const review = form.review.value;
+    console.log(review);
+  };
   return (
     <>
       <div>
@@ -47,59 +57,72 @@ const SingleFoodPage = () => {
                       <p className="text-sm text-gray-500 ">Made By</p>
                       <h1 className="text-sm text-gray-700 ">{MadeBy}</h1>
                     </div>
-                    <div
-                      className="mx-0 py-3 md:mx-5 tooltip"
-                      data-tip="Give Review"
-                    >
-                      <button
-                        className="btn"
-                        onClick={() =>
-                          document.getElementById("my_modal_5").showModal()
-                        }
+                    {/* REVIEW MODAL */}
+
+                    {user ? (
+                      <div
+                        className="mx-0 py-3 md:mx-5 tooltip"
+                        data-tip="Give Review"
                       >
-                        <MdOutlineReviews className="text-3xl" />
-                      </button>
-                      <dialog
-                        id="my_modal_5"
-                        className="modal modal-bottom px-3 sm:modal-middle"
-                      >
-                        <div className="modal-box">
-                          <form>
-                            <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-50">
-                              <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
-                                <div className="col-span-full">
-                                  <label htmlFor="bio" className="text-sm">
-                                    Review
-                                  </label>
-                                  <textarea
-                                    id="bio"
-                                    placeholder="Write your Review"
-                                    className="w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
-                                  ></textarea>
-                                </div>
-                                <div className="col-span-full">
-                                  <div className="flex items-center space-x-2">
-                                    <button
-                                      type="button"
-                                      className="px-4 py-2 border rounded-md dark:border-gray-800"
-                                    >
-                                      Enter
-                                    </button>
+                        <button
+                          className="btn"
+                          onClick={() =>
+                            document.getElementById("my_modal_5").showModal()
+                          }
+                        >
+                          <MdOutlineReviews className="text-3xl" />
+                        </button>
+                        <dialog
+                          id="my_modal_5"
+                          className="modal modal-bottom px-3 sm:modal-middle"
+                        >
+                          <div className="modal-box">
+                            <form onSubmit={addReview}>
+                              <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-50">
+                                <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
+                                  <div className="col-span-full">
+                                    <label htmlFor="bio" className="text-sm">
+                                      Review
+                                    </label>
+                                    <textarea
+                                      id="review"
+                                      name="review"
+                                      placeholder="Write your Review"
+                                      className="w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
+                                    ></textarea>
+                                  </div>
+                                  <div>
+                                    <ul>
+                                      <li>{user?.displayName}</li>
+                                    </ul>
+                                  </div>
+                                  <div className="col-span-full">
+                                    <div className="flex items-center space-x-2">
+                                      <button
+                                        type="submit"
+                                        className="px-4 py-2 border rounded-md dark:border-gray-800"
+                                      >
+                                        Enter
+                                      </button>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </fieldset>
-                          </form>
-
-                          <div className="modal-action">
-                            <form method="dialog">
-                              {/* if there is a button in form, it will close the modal */}
-                              <button className="btn">Close</button>
+                              </fieldset>
                             </form>
+
+                            <div className="modal-action">
+                              <form method="dialog">
+                                {/* if there is a button in form, it will close the modal */}
+                                <button className="btn">Close</button>
+                              </form>
+                            </div>
                           </div>
-                        </div>
-                      </dialog>
-                    </div>
+                        </dialog>
+                      </div>
+                    ) : (
+                      <div></div>
+                    )}
+                    {/* PURCHASE BUTTONS */}
                     <div className="flex-row mr-3 flex-1 md:flex items-center lg:gap-x-3">
                       <Link
                         to={`/purchase/${_id}`}
