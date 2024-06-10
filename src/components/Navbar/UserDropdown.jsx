@@ -60,7 +60,7 @@ const UserDropdown = () => {
           </Link>
           <hr className="border-gray-200" />
           <Link
-            href="#"
+            to="/dashboard"
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform hover:bg-gray-100"
           >
             Dashboard

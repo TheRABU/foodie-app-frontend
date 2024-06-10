@@ -7,6 +7,8 @@ import PurchaseNowPage from "../pages/FoodPurchasePage/PurchaseNowPage";
 import SignUp from "../pages/SignUpPage/SignUp";
 import LogIn from "../pages/LoginPage/LogIn";
 import PrivateRoutes from "./PrivateRoute";
+import MyDashBoard from "../pages/DashboardPage/MyDashBoard";
+import DashBoardLayout from "../layouts/DashBoardLayout";
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +47,16 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <LogIn />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashBoardLayout />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <MyDashBoard />,
       },
     ],
   },
