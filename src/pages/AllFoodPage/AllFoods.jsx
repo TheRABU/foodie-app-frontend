@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, NavLink, useLoaderData } from "react-router-dom";
 import { useEffect, useState } from "react";
 import FoodCollectionCard from "./FoodCollectionGrid/FoodCollectionCard";
 import Skeleton from "../../components/Skeleton/Skeleton";
@@ -49,6 +49,7 @@ const AllFoods = () => {
         <h2 className="text-center text-7xl font-bold text-black">
           All <span className="text-red-500">foods</span>
         </h2>
+
         <div className="px-5 lg:px-28 w-full lg:max-w-screen mx-auto">
           {/* SEARCH BAR */}
           <>

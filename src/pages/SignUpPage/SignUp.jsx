@@ -1,10 +1,34 @@
 import { Link } from "react-router-dom";
-
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Swal from "sweetalert2";
+import { useState } from "react";
 const SignUp = () => {
+  const [showPass, setShowPass] = useState(false);
+  const [matchedPassword, setMatchedPassword] = useState(false);
+
+  // form handler
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirmPassword = form.confirmPassword.value;
+
+    if (password === confirmPassword) {
+      setMatchedPassword(false);
+    } else if (password !== confirmPassword) {
+      setMatchedPassword(true);
+      Swal.fire("passwords do not match");
+      return;
+    }
+
+    console.log(email, name, password);
+  };
   return (
     <section className="bg-white ">
       <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
-        <form className="w-full max-w-md">
+        <form onSubmit={handleSignUp} className="w-full max-w-md">
           <h1 className="mt-3 text-center text-2xl font-semibold text-gray-800 capitalize sm:text-3xl">
             Sign Up
           </h1>
@@ -45,34 +69,11 @@ const SignUp = () => {
 
             <input
               type="text"
+              name="name"
               className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11    focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-              placeholder="Username"
+              placeholder="Name"
             />
           </div>
-
-          <label
-            htmlFor="dropzone-file"
-            className="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-white border-2 border-dashed rounded-lg cursor-pointer"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6 text-gray-300 "
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-              />
-            </svg>
-
-            <h2 className="mx-3 text-gray-400">Profile Photo</h2>
-
-            <input id="dropzone-file" type="file" className="hidden" />
-          </label>
 
           <div className="relative flex items-center mt-6">
             <span className="absolute">
@@ -94,6 +95,7 @@ const SignUp = () => {
 
             <input
               type="email"
+              name="email"
               className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11   focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
               placeholder="Email address"
             />
@@ -118,10 +120,21 @@ const SignUp = () => {
             </span>
 
             <input
-              type="password"
-              className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              type={showPass ? "text" : "password"}
+              name="password"
+              className={
+                matchedPassword
+                  ? "block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg   focus:border-red-500 dark:focus:border-red-300 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                  : `block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40`
+              }
               placeholder="Password"
             />
+            <span
+              onClick={() => setShowPass(!showPass)}
+              className="absolute top-4 right-3"
+            >
+              {showPass ? <FaEyeSlash /> : <FaEye />}
+            </span>
           </div>
 
           <div className="relative flex items-center mt-4">
@@ -143,10 +156,21 @@ const SignUp = () => {
             </span>
 
             <input
-              type="password"
-              className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              type={showPass ? "text" : "password"}
+              name="confirmPassword"
+              className={
+                matchedPassword
+                  ? "block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg   focus:border-red-500 dark:focus:border-red-300 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                  : `block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40`
+              }
               placeholder="Confirm Password"
             />
+            <span
+              onClick={() => setShowPass(!showPass)}
+              className="absolute top-4 right-3"
+            >
+              {showPass ? <FaEyeSlash /> : <FaEye />}
+            </span>
           </div>
 
           <div className="mt-6">

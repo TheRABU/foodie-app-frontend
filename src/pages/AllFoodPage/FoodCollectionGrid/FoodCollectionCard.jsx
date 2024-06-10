@@ -32,9 +32,12 @@ const FoodCollectionCard = ({ food }) => {
             </span>
           </div>
           <div className="flex justify-between">
-            <button className="btn rounded-3xl bg-red-600 hover:bg-yellow-400 text-white font-semibold">
-              Order Now
-            </button>
+            <Link to={`/purchase/${_id}`}>
+              <button className="btn rounded-3xl bg-red-600 hover:bg-yellow-400 text-white font-semibold">
+                Order Now
+              </button>
+            </Link>
+
             <Link to={`/single-food/${_id}`}>
               <button className="btn rounded-lg bg-blue-600 hover:bg-indigo-700 text-white font-semibold">
                 View Details
