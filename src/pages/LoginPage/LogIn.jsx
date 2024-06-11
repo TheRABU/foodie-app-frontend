@@ -20,11 +20,7 @@ const LogIn = () => {
     signIn(email, password)
       .then(() => {
         // navigate(location?.pathname ? location.pathname : "/");
-        if (location && location.state && location.state.from) {
-          navigate(location.state.from.pathname);
-        } else {
-          navigate("/");
-        }
+        navigate(location?.pathname ? location.pathname : "/");
       })
       .catch((error) => {
         const errorMsg = error.message;
@@ -36,11 +32,12 @@ const LogIn = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
-        if (location && location.state && location.state.from) {
-          navigate(location.state.from.pathname);
-        } else {
-          navigate("/");
-        }
+        // if (location && location.state && location.state.from) {
+        //   navigate(location.state.from.pathname);
+        // } else {
+        //   navigate("/");
+        // }
+        navigate(location?.pathname ? location.pathname : "/");
       })
       .catch((error) => {
         const errorMsg = error.message;
