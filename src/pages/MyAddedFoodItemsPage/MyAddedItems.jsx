@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthenticateProvider";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 import AddItemCard from "./AddItemCard";
 
 const MyAddedItems = () => {
@@ -29,6 +30,42 @@ const MyAddedItems = () => {
         console.log("Error occurred during fetching your request");
       });
   }, [url]);
+
+  // handleDeleteRequestedItem
+
+  const handleDeleteRequestedItem = (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete(`http://localhost:5000/request/${_id}`)
+            .then((response) => {
+              if (response.status === 200) {
+                const remaining = myItems.filter((ord) => ord._id !== _id);
+                setMyItems(remaining);
+                Swal.fire(
+                  "Deleted!",
+                  "Your order has been deleted.",
+                  "success"
+                );
+              } else {
+                console.log("Failed to delete order");
+              }
+            });
+        }
+      })
+      .catch((error) => {
+        console.log("Sorry, could not delete", error);
+      });
+  };
 
   if (loading) {
     return (
@@ -201,6 +238,7 @@ const MyAddedItems = () => {
                 key={item._id}
                 item={item}
                 setMyItems={setMyItems}
+                handleDeleteRequestedItem={handleDeleteRequestedItem}
                 myItems={myItems}
               />
             ))}
