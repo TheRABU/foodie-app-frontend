@@ -20,7 +20,7 @@ const LogIn = () => {
     signIn(email, password)
       .then(() => {
         // navigate(location?.pathname ? location.pathname : "/");
-        navigate(location?.pathname ? location.pathname : "/");
+        navigate("/");
       })
       .catch((error) => {
         const errorMsg = error.message;
@@ -37,7 +37,7 @@ const LogIn = () => {
         // } else {
         //   navigate("/");
         // }
-        navigate(location?.pathname ? location.pathname : "/");
+        navigate("/");
       })
       .catch((error) => {
         const errorMsg = error.message;

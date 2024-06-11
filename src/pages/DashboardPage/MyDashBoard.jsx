@@ -1,24 +1,16 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthenticateProvider";
 import { useNavigate } from "react-router-dom";
+import LeftDashboardBar from "../../components/LeftSideBar/LeftDashboardBar";
 
 const MyDashBoard = () => {
   const { user, logOut } = useContext(AuthContext);
-  const navigate = useNavigate();
-  // handleLogout
-  const handleLogOut = () => {
-    logOut()
-      .then(() => {
-        navigate("/");
-      })
-      .catch();
-  };
 
   return (
     <>
       <div className="flex-row md:flex justify-between h-full">
         {/* SIDEBAR */}
-        <div className="hidden md:block min-h-screen p-3 space-y-2 w-2/6 bg-[#1F2544] text-gray-100">
+        {/* <div className="hidden md:block min-h-screen p-3 space-y-2 w-2/6 bg-[#1F2544] text-gray-100">
           <div className="flex items-center p-2 space-x-4">
             <img
               src={user?.photoURL}
@@ -160,7 +152,8 @@ const MyDashBoard = () => {
               </li>
             </ul>
           </div>
-        </div>
+        </div> */}
+        <LeftDashboardBar />
         {/* RIGHT SIDE CONTENT */}
         <div className="w-full px-5 h-full bg-slate-300">
           <h1 className="text-3xl text-center">My Orders</h1>
