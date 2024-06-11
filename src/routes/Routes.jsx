@@ -11,9 +11,10 @@ import MyDashBoard from "../pages/DashboardPage/MyDashBoard";
 import DashBoardLayout from "../layouts/DashBoardLayout";
 import ErrorPage from "../pages/404ErrorPage/ErrorPage";
 import OurGallery from "../pages/GalleryPage/OurGallery";
-import AddGalleryItem from "../pages/AddItemToGallery/AddGalleryItem";
 import MyAddedItems from "../pages/MyAddedFoodItemsPage/MyAddedItems";
 import MyOrders from "../pages/MyPurchasePage/MyOrders";
+import AddFoodRequest from "../pages/AddFoodRequest/AddFoodRequest";
+import AddReviewGallery from "../pages/AddReviewToGallery/AddReviewGallery";
 
 export const router = createBrowserRouter([
   {
@@ -77,7 +78,7 @@ export const router = createBrowserRouter([
         path: "/request",
         element: (
           <PrivateRoutes>
-            <AddGalleryItem />,
+            <AddFoodRequest />,
           </PrivateRoutes>
         ),
       },
@@ -94,6 +95,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <MyOrders />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/add-review-gallery",
+        element: (
+          <PrivateRoutes>
+            <AddReviewGallery />,
           </PrivateRoutes>
         ),
       },

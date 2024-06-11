@@ -163,7 +163,7 @@ const MyOrders = () => {
         {/* RIGHT SIDE CONTENT */}
         <div className="w-full px-5 h-full bg-slate-300">
           <section className="grid grid-cols-3 gap-5">
-            <h2 className="text-center text-3xl ">My Orders</h2>
+            <h2 className="text-center text-3xl ">My Ordered food items</h2>
           </section>
         </div>
       </div>

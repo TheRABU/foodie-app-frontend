@@ -29,7 +29,7 @@ const TopFoodSection = () => {
         Our Top <br />
         <span className="text-[#FF004D]">Food</span> Items
       </h3>
-      <div className="mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 py-8 px-12 md:px-16 lg:px-32">
+      <div className="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-0 lg:py-8 px-4 md:px-16 lg:px-32">
         {foodItems.slice(0, 6).map((food, idx) => (
           <FoodCard key={idx} food={food} />
         ))}

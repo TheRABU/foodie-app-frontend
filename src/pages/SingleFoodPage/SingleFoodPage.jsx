@@ -28,9 +28,9 @@ const SingleFoodPage = () => {
   return (
     <>
       <div>
-        <section className="bg-white px-8 lg:px-28">
+        <section className="bg-[#ffffff] px-4 lg:px-28">
           <h3 className="text-3xl pt-5 font-serif text-center">{FoodName}</h3>
-          <div className="container px-6 py-10 mx-auto">
+          <div className="container  py-10 mx-auto">
             <div className="lg:flex lg:-mx-6">
               <div className="lg:w-3/4 lg:px-6">
                 <img

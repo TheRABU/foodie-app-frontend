@@ -90,7 +90,7 @@ const AllFoods = () => {
           </>
         </div>
         {/* Foods Collection Grid */}
-        <div className="mx-auto h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 px-5 md:px-10 lg:px-20 gap-10">
+        <div className="mx-auto h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 px-10 lg:px-20 gap-10">
           {Array.isArray(foods) && foods.length > 0 ? (
             foods.map((food) => (
               <FoodCollectionCard key={food._id} food={food} />
