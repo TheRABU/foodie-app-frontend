@@ -1,9 +1,13 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthenticateProvider";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import AddItemCard from "./AddItemCard";
 
 const MyAddedItems = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [myItems, setMyItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   // handleLogout
   const handleLogOut = () => {
@@ -13,6 +17,30 @@ const MyAddedItems = () => {
       })
       .catch();
   };
+  const url = `http://localhost:5000/myRequest/${user?.email}`;
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((response) => {
+        setLoading(false);
+        setMyItems(response.data);
+      })
+      .catch((error) => {
+        console.log("Error occurred during fetching your request");
+      });
+  }, [url]);
+
+  if (loading) {
+    return (
+      <div className="h-screen flex gap-4 p-4 flex-wrap justify-center items-center">
+        <img
+          className="w-20 h-20 animate-spin"
+          src="https://www.svgrepo.com/show/474682/loading.svg"
+          alt="Loading icon"
+        />
+      </div>
+    );
+  }
 
   // GET REQUEST FROM DB BY USR EMAIL
   return (
@@ -167,7 +195,16 @@ const MyAddedItems = () => {
           <h2 className="text-center text-3xl ">
             My Added Custom food requests
           </h2>
-          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto px-3 lg:px-20"></section>
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto px-3 lg:px-20">
+            {myItems.map((item) => (
+              <AddItemCard
+                key={item._id}
+                item={item}
+                setMyItems={setMyItems}
+                myItems={myItems}
+              />
+            ))}
+          </section>
         </div>
       </div>
     </>
