@@ -1,12 +1,33 @@
-import { useContext } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { useContext, useState } from "react";
+import {
+  Link,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { AuthContext } from "../../providers/AuthenticateProvider";
 import Swal from "sweetalert2";
+import axios from "axios";
+
 const PurchaseNowPage = () => {
   const foodDetail = useLoaderData();
   const { FoodImage, FoodName, Quantity, Price } = foodDetail;
   const { user } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [counter, setCounter] = useState(1);
 
+  // increment decrement button handlers
+  const incrementCount = () => {
+    if (counter < Quantity) {
+      setCounter(counter + 1);
+    }
+  };
+  const decrementCount = () => {
+    if (counter > 1) {
+      setCounter(counter - 1);
+    }
+  };
   // handle order function
 
   const handleOrder = (e) => {
@@ -30,38 +51,35 @@ const PurchaseNowPage = () => {
       postCode,
       FoodName,
       Price,
+      orderQuantity: counter,
     };
-    console.log(orderValue);
-    Swal.fire({
-      position: "top-center",
-      icon: "success",
-      title: "Order Confirmed",
-      showConfirmButton: false,
-      timer: 1500,
-    });
+
+    axios
+      .post("http://localhost:5000/order", orderValue)
+      .then((response) => {
+        if (response.data.insertedId) {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Order Confirmed",
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(() => {
+            navigate("/");
+          });
+        }
+
+        navigate(location?.pathname ? location.pathname : "/");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   return (
     <>
       <div className="flex-row lg:flex items-center justify-center py-12 px-6 lg:px-16">
         <div>
-          {/* <div className="mb-5 px-3 md:px-20">
-            <div className="card bg-base-100 shadow-2xl">
-              <figure className="px-10 pt-10">
-                <img src={FoodImage} alt="Food Image" className="rounded-xl" />
-              </figure>
-              <div className="card-body items-center text-center">
-                <h2 className="card-title">{FoodName}</h2>
-                <p>BDT {Price}</p>
-                <p>Available {Quantity}</p>
-                <Link to="/all-foods">
-                  <button className="btn mx-auto px-10 bg-violet-50">
-                    Browse more
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div> */}
           <div className="max-w-md mx-auto rounded-md shadow-md bg-gray-900 text-gray-100">
             <img
               src={FoodImage}
@@ -75,6 +93,66 @@ const PurchaseNowPage = () => {
                 </h2>
                 <p className="text-gray-100">BDT {Price}</p>
                 <p className="text-gray-100">Left {Quantity}</p>
+
+                <div
+                  className="py-2 px-3 inline-block bg-white border border-gray-200 rounded-lg dark:bg-neutral-900 dark:border-neutral-700"
+                  data-hs-input-number=""
+                >
+                  <div className="flex items-center gap-x-1.5">
+                    <button
+                      onClick={decrementCount}
+                      type="button"
+                      className="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
+                      data-hs-input-number-decrement=""
+                    >
+                      <svg
+                        className="flex-shrink-0 size-3.5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M5 12h14"></path>
+                      </svg>
+                    </button>
+                    <label htmlFor="orderQuantity">Order Quantity</label>
+                    <input
+                      className="p-0 w-6 bg-transparent border-0 text-gray-800 text-center focus:ring-0 dark:text-white"
+                      type="text"
+                      value={counter}
+                      readOnly
+                      placeholder="Quantity"
+                      data-hs-input-number-input=""
+                    />
+                    <button
+                      onClick={incrementCount}
+                      type="button"
+                      className="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
+                      data-hs-input-number-increment=""
+                    >
+                      <svg
+                        className="flex-shrink-0 size-3.5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
               </div>
 
               <Link to="/all-foods">
@@ -85,6 +163,7 @@ const PurchaseNowPage = () => {
             </div>
           </div>
         </div>
+        {/* FORM */}
         <div className="mx-auto w-full max-w-[550px] bg-white">
           <form onSubmit={handleOrder}>
             <div className="mb-5">
@@ -209,7 +288,10 @@ const PurchaseNowPage = () => {
             </div>
 
             <div>
-              <button className="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+              <button
+                type="submit"
+                className="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+              >
                 Order Now
               </button>
             </div>
