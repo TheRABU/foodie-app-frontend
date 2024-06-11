@@ -164,9 +164,10 @@ const MyAddedItems = () => {
         </div>
         {/* RIGHT SIDE CONTENT */}
         <div className="w-full px-5 h-full bg-slate-300">
-          <section className="grid grid-cols-3 gap-5">
-            <h2 className="text-center">My Added Custom food Requests </h2>
-          </section>
+          <h2 className="text-center text-3xl ">
+            My Added Custom food requests
+          </h2>
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto px-3 lg:px-20"></section>
         </div>
       </div>
     </>
