@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthenticateProvider";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddFoodRequest = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -29,7 +31,24 @@ const AddFoodRequest = () => {
       foodName,
       description,
     };
-    console.log(customRequest);
+    axios
+      .post("http://localhost:5000/addRequest", customRequest)
+      .then((response) => {
+        if (response.data.insertedId) {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Order Confirmed",
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(() => {
+            navigate("/");
+          });
+        }
+      })
+      .catch((error) => {
+        console.log("Sorry could not Add your request at the moment");
+      });
   };
   return (
     <>

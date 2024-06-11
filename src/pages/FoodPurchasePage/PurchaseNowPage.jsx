@@ -50,6 +50,7 @@ const PurchaseNowPage = () => {
       city,
       postCode,
       FoodName,
+      FoodImage,
       Price,
       orderQuantity: counter,
     };
