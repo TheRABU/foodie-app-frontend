@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const MyOrderCard = ({ orders, order, setOrders, handleDeleteOrder }) => {
+const MyOrderCard = ({ order, handleDeleteOrder }) => {
   const {
     _id,
     FoodName,

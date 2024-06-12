@@ -136,6 +136,9 @@ const MyDashBoard = () => {
                 <div className="xl:w-1/4 xl:h-32 lg:w-1/5 lg:h-32 md:w-1/5 md:h-28 sm:w-1/3 sm:h-[5rem] xs:w-1/3 xs:h-[4rem] flex justify-center items-center rounded-sm text-center text-lg px-6 py-4 border-2 border-dashed border-gray-300  dark:border-2 dark:border-dashed dark:border-gray-700">
                   <Link to="/all-foods">Give food review</Link>
                 </div>
+                <div className="xl:w-1/4 xl:h-32 lg:w-1/5 lg:h-32 md:w-1/5 md:h-28 sm:w-1/3 sm:h-[5rem] xs:w-1/3 xs:h-[4rem] flex justify-center items-center rounded-sm text-center text-lg px-6 py-4 border-2 border-dashed border-gray-300  dark:border-2 dark:border-dashed dark:border-gray-700">
+                  <Link to="/myFoodReviews">My posted food reviews</Link>
+                </div>
               </div>
             </div>
           </div>

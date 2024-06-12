@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthenticateProvider";
 import { Link, useNavigate } from "react-router-dom";
+import { FaRegStar } from "react-icons/fa";
 
 const LeftDashboardBar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -89,6 +90,10 @@ const LeftDashboardBar = () => {
                 </svg>
                 <span>My ordered items</span>
               </Link>
+            </li>
+            <li className="flex justify-center items-center mr-28">
+              <FaRegStar />
+              <Link to="myFoodReviews">My Food Reviews</Link>
             </li>
             <li>
               <Link

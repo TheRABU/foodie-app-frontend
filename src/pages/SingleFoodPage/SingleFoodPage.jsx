@@ -40,10 +40,16 @@ const SingleFoodPage = () => {
   const url = `http://localhost:5000/foodReview/${_id}`;
 
   useEffect(() => {
-    axios.get(url).then((res) => {
-      setUserReviews(res.data);
-      console.log(res.data);
-    });
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(url);
+        setUserReviews(res.data);
+      } catch (err) {
+        console.error("Got an error:", err.response?.data);
+      }
+    };
+
+    fetchData();
   }, [url]);
 
   // post review
@@ -65,47 +71,29 @@ const SingleFoodPage = () => {
       reviewRatings,
     };
 
-    // axios
-    //   .post("http://localhost:5000/addFoodReview", pay)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.insertedId) {
-    //       Swal.fire({
-    //         position: "top-center",
-    //         icon: "success",
-    //         title: "Order Confirmed",
-    //         showConfirmButton: false,
-    //         timer: 1500,
-    //       }).then(() => {
-    //         navigate("/");
-    //       });
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log("Could not send request", error);
-    //   });
     try {
       const res = await axios.post(
         "http://localhost:5000/addFoodReview",
         payload
       );
-      console.log(res.data);
-    } catch (err) {
-      console.error("Got an error:", err.response.data);
-    }
+      if (res.data.insertedId) {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Review Added",
+          showConfirmButton: false,
+          timer: 1500,
+        });
 
-    // fetch("http://localhost:5000/addFoodReview", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(takenReview),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   });
+        setUserReviews([...userReviews, payload]);
+      }
+    } catch (err) {
+      console.error("Got an error:", err.response?.data);
+    }
   };
+
+  // delete Review
+
   return (
     <>
       <div>

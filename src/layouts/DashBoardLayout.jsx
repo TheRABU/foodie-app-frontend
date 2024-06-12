@@ -1,8 +1,6 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import NavBar from "../components/Navbar/NavBar";
 import LeftDashboardBar from "../components/LeftSideBar/LeftDashboardBar";
-import { useContext } from "react";
-import { AuthContext } from "../providers/AuthenticateProvider";
 
 const DashBoardLayout = () => {
   return (

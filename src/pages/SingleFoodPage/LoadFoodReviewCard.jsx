@@ -1,5 +1,6 @@
 const LoadFoodReviewCard = ({ eachReview }) => {
-  const { userEmail, foodName, review, reviewRatings, userPic } = eachReview;
+  const { _id, userEmail, foodName, review, reviewRatings, userPic } =
+    eachReview;
   return (
     <>
       {/* REVIEW CARD */}
@@ -32,6 +33,14 @@ const LoadFoodReviewCard = ({ eachReview }) => {
         <div className="p-4 space-y-2 text-sm text-gray-400">
           <p>{userEmail}</p>
         </div>
+        {/* <div className="card-actions justify-end">
+          <button
+            onClick={() => handleDeleteReview(_id)}
+            className="btn btn-error"
+          >
+            Delete Order
+          </button>
+        </div> */}
       </div>
       {/* REVIEW CARD ENDS */}
     </>

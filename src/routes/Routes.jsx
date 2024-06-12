@@ -15,6 +15,7 @@ import MyAddedItems from "../pages/MyAddedFoodItemsPage/MyAddedItems";
 import MyOrders from "../pages/MyPurchasePage/MyOrders";
 import AddFoodRequest from "../pages/AddFoodRequest/AddFoodRequest";
 import AddReviewGallery from "../pages/AddReviewToGallery/AddReviewGallery";
+import MyFoodItemReviews from "../pages/MyFoodReviewsPage/MyFoodItemReviews";
 
 export const router = createBrowserRouter([
   {
@@ -103,6 +104,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <AddReviewGallery />,
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/myFoodReviews",
+        element: (
+          <PrivateRoutes>
+            <MyFoodItemReviews />
           </PrivateRoutes>
         ),
       },
