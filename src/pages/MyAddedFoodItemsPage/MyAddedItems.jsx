@@ -1,24 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthenticateProvider";
-import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import Swal from "sweetalert2";
 import AddItemCard from "./AddItemCard";
-import LeftDashboardBar from "../../components/LeftSideBar/LeftDashboardBar";
 
 const MyAddedItems = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [myItems, setMyItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-  // handleLogout
-  const handleLogOut = () => {
-    logOut()
-      .then(() => {
-        navigate("/");
-      })
-      .catch();
-  };
+
   const url = `http://localhost:5000/myRequest/${user?.email}`;
   useEffect(() => {
     axios
@@ -83,26 +74,20 @@ const MyAddedItems = () => {
   // GET REQUEST FROM DB BY USR EMAIL
   return (
     <>
-      <div className="flex-row md:flex justify-between h-full">
-        {/* SIDEBAR */}
-        <LeftDashboardBar />
-        {/* RIGHT SIDE CONTENT */}
-        <div className="w-full px-5 h-full bg-slate-300">
-          <h2 className="text-center text-3xl ">
-            My Added Custom food requests
-          </h2>
-          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto px-3 lg:px-20">
-            {myItems.map((item) => (
-              <AddItemCard
-                key={item._id}
-                item={item}
-                setMyItems={setMyItems}
-                handleDeleteRequestedItem={handleDeleteRequestedItem}
-                myItems={myItems}
-              />
-            ))}
-          </section>
-        </div>
+      {/* RIGHT SIDE CONTENT */}
+      <div className="w-full px-5 h-full bg-[#ffffff]">
+        <h2 className="text-center text-3xl ">My Added Custom food requests</h2>
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto px-3 lg:px-20">
+          {myItems.map((item) => (
+            <AddItemCard
+              key={item._id}
+              item={item}
+              setMyItems={setMyItems}
+              handleDeleteRequestedItem={handleDeleteRequestedItem}
+              myItems={myItems}
+            />
+          ))}
+        </section>
       </div>
     </>
   );

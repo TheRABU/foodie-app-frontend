@@ -1,14 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthenticateProvider";
-import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import Swal from "sweetalert2";
 import MyOrderCard from "./MyOrderCard";
-import LeftDashboardBar from "../../components/LeftSideBar/LeftDashboardBar";
 
 const MyOrders = () => {
-  const { user, logOut } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -21,18 +19,10 @@ const MyOrders = () => {
         setOrders(response.data);
       })
       .catch((error) => {
-        console.log("Error occurred during fetching your request");
+        console.log("Error occurred during fetching your request", error);
       });
   }, [url]);
 
-  // handleLogout
-  const handleLogOut = () => {
-    logOut()
-      .then(() => {
-        navigate("/");
-      })
-      .catch();
-  };
   const handleDeleteOrder = (_id) => {
     // const proceed = confirm("Are You sure you want to delete");
     // if (proceed) {
@@ -94,41 +84,36 @@ const MyOrders = () => {
   }
   return (
     <>
-      <div className="flex-row md:flex justify-between h-full">
-        {/* SIDEBAR */}
-        <LeftDashboardBar />
-        {/* RIGHT SIDE CONTENT */}
-        <div className="w-full px-5 h-full bg-slate-300">
-          <h2 className="text-center text-3xl "> My Ordered food items</h2>
-          <section className="h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto px-3 lg:px-20">
-            {orders.map((order) => (
-              // <div className="h-auto" key={order._id}>
-              //   <div className="card bg-base-100 shadow-xl">
-              //     <figure>
-              //       <img
-              //         src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-              //         alt="Shoes"
-              //       />
-              //     </figure>
-              //     <div className="card-body">
-              //       <h2 className="card-title">{order.FoodName}</h2>
-              //       <p>Quantity {order.orderQuantity}</p>
-              //       <div className="card-actions justify-end">
-              //         <button className="btn btn-error">Delete Order</button>
-              //       </div>
-              //     </div>
-              //   </div>
-              // </div>
-              <MyOrderCard
-                key={order._id}
-                orders={orders}
-                handleDeleteOrder={handleDeleteOrder}
-                setOrders={setOrders}
-                order={order}
-              />
-            ))}
-          </section>
-        </div>
+      <div className="w-full px-5 h-full bg-[#ffffff]">
+        <h2 className="text-center text-3xl "> My Ordered food items</h2>
+        <section className="h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto px-3 lg:px-20">
+          {orders.map((order) => (
+            // <div className="h-auto" key={order._id}>
+            //   <div className="card bg-base-100 shadow-xl">
+            //     <figure>
+            //       <img
+            //         src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+            //         alt="Shoes"
+            //       />
+            //     </figure>
+            //     <div className="card-body">
+            //       <h2 className="card-title">{order.FoodName}</h2>
+            //       <p>Quantity {order.orderQuantity}</p>
+            //       <div className="card-actions justify-end">
+            //         <button className="btn btn-error">Delete Order</button>
+            //       </div>
+            //     </div>
+            //   </div>
+            // </div>
+            <MyOrderCard
+              key={order._id}
+              orders={orders}
+              handleDeleteOrder={handleDeleteOrder}
+              setOrders={setOrders}
+              order={order}
+            />
+          ))}
+        </section>
       </div>
     </>
   );

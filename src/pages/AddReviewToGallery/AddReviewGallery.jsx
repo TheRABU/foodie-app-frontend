@@ -2,8 +2,8 @@ const AddReviewGallery = () => {
   // POST REVIEWS ABOUT FOODIE BITE
   return (
     <>
-      <div className="h-full mx-auto px-8 lg:px-20 my-10 lg:my-20">
-        <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
+      <div className="h-full bg-[#ffffff] mx-auto px-8 lg:px-20 my-10 lg:my-20">
+        <section className="max-w-4xl p-6 mx-auto bg-pink-50 rounded-md shadow-md dark:bg-gray-800">
           <h2 className="text-lg font-semibold text-gray-700 capitalize dark:text-white">
             Write a Review
           </h2>
