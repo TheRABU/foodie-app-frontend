@@ -1,11 +1,17 @@
-import { useContext, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { MdOutlineReviews } from "react-icons/md";
 import { AuthContext } from "../../providers/AuthenticateProvider";
+
+import Swal from "sweetalert2";
+import axios from "axios";
+import LoadFoodReviewCard from "./LoadFoodReviewCard";
 const SingleFoodPage = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const foodData = useLoaderData();
   const [singleFood, setSingleFood] = useState(foodData);
+  const [userReviews, setUserReviews] = useState([]);
   const {
     _id,
     FoodName,
@@ -18,15 +24,87 @@ const SingleFoodPage = () => {
     Quantity,
   } = singleFood;
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await axios.get(`http://localhost:5000/foodReview/${_id}`);
+  //       console.log(res.data);
+  //     } catch (err) {
+  //       console.error("Got an error:", err.response?.data);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+  const url = `http://localhost:5000/foodReview/${_id}`;
+
+  useEffect(() => {
+    axios.get(url).then((res) => {
+      setUserReviews(res.data);
+      console.log(res.data);
+    });
+  }, [url]);
+
   // post review
-  const addReview = (e) => {
+  const addReview = async (e) => {
     e.preventDefault();
     const form = e.target;
     const foodName = FoodName;
     const userEmail = user?.email;
+    const userPic = user?.photoURL;
     const review = form.review.value;
-    const reviewRatings = form.reviewRatings.value;
-    console.log(review);
+    const reviewRatings = parseFloat(form.reviewRatings.value);
+
+    const payload = {
+      _id,
+      foodName,
+      userEmail,
+      review,
+      userPic,
+      reviewRatings,
+    };
+
+    // axios
+    //   .post("http://localhost:5000/addFoodReview", pay)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     if (response.data.insertedId) {
+    //       Swal.fire({
+    //         position: "top-center",
+    //         icon: "success",
+    //         title: "Order Confirmed",
+    //         showConfirmButton: false,
+    //         timer: 1500,
+    //       }).then(() => {
+    //         navigate("/");
+    //       });
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log("Could not send request", error);
+    //   });
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/addFoodReview",
+        payload
+      );
+      console.log(res.data);
+    } catch (err) {
+      console.error("Got an error:", err.response.data);
+    }
+
+    // fetch("http://localhost:5000/addFoodReview", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(takenReview),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //   });
   };
   return (
     <>
@@ -95,7 +173,8 @@ const SingleFoodPage = () => {
                                       id="review"
                                       name="review"
                                       placeholder="Write your Review"
-                                      className="w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
+                                      required={true}
+                                      className="w-full rounded-md focus:ring focus:ring-opacity-75 text-black focus:dark:ring-violet-600 dark:border-gray-300"
                                     ></textarea>
                                   </div>
                                   <div className="col-span-full">
@@ -112,7 +191,8 @@ const SingleFoodPage = () => {
                                       max={5}
                                       step={0.5}
                                       id="reviewRatings"
-                                      className="input input-bordered input-info w-full"
+                                      required={true}
+                                      className="input input-bordered input-info w-full text-black"
                                     />
                                   </div>
 
@@ -188,82 +268,15 @@ const SingleFoodPage = () => {
                   </div>
                   {/* REVIEWS */}
                   <div className="grid grid-cols-1 w-full md:w-4/6 gap-y-8 md:mr-28  px-3 my-10 ">
-                    {/* REVIEW CARD */}
-                    <div className="container flex flex-col w-full  p-6 mx-auto divide-y rounded-md divide-gray-700 bg-gray-900 text-gray-100">
-                      <div className="flex justify-between p-4">
-                        <div className="flex space-x-4">
-                          <div>
-                            <img
-                              src="https://source.unsplash.com/100x100/?portrait"
-                              alt=""
-                              className="object-cover w-12 h-12 rounded-full bg-gray-500"
-                            />
-                          </div>
-                          <div>
-                            <h4 className="font-bold">User Name</h4>
-                            <span className="text-xs text-gray-400">
-                              2 days ago
-                            </span>
-                          </div>
-                        </div>
-                        <div className="flex items-center space-x-2 text-yellow-500">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 512 512"
-                            className="w-5 h-5 fill-current"
-                          >
-                            <path d="M494,198.671a40.536,40.536,0,0,0-32.174-27.592L345.917,152.242,292.185,47.828a40.7,40.7,0,0,0-72.37,0L166.083,152.242,50.176,171.079a40.7,40.7,0,0,0-22.364,68.827l82.7,83.368-17.9,116.055a40.672,40.672,0,0,0,58.548,42.538L256,428.977l104.843,52.89a40.69,40.69,0,0,0,58.548-42.538l-17.9-116.055,82.7-83.368A40.538,40.538,0,0,0,494,198.671Zm-32.53,18.7L367.4,312.2l20.364,132.01a8.671,8.671,0,0,1-12.509,9.088L256,393.136,136.744,453.3a8.671,8.671,0,0,1-12.509-9.088L144.6,312.2,50.531,217.37a8.7,8.7,0,0,1,4.778-14.706L187.15,181.238,248.269,62.471a8.694,8.694,0,0,1,15.462,0L324.85,181.238l131.841,21.426A8.7,8.7,0,0,1,461.469,217.37Z"></path>
-                          </svg>
-                          <span className="text-xl font-bold">4.5</span>
-                        </div>
-                      </div>
-                      <div className="p-4 space-y-2 text-sm text-gray-400">
-                        <p>
-                          Vivamus sit amet turpis leo. Praesent varius eleifend
-                          elit, eu dictum lectus consequat vitae. Etiam ut dolor
-                          id justo fringilla finibus.
-                        </p>
-                      </div>
-                    </div>
-                    {/* REVIEW CARD ENDS */}
-                    {/* REVIEW CARD */}
-                    <div className="container flex flex-col w-full  p-6 mx-auto divide-y rounded-md divide-gray-700 bg-gray-900 text-gray-100">
-                      <div className="flex justify-between p-4">
-                        <div className="flex space-x-4">
-                          <div>
-                            <img
-                              src="https://source.unsplash.com/100x100/?portrait"
-                              alt=""
-                              className="object-cover w-12 h-12 rounded-full bg-gray-500"
-                            />
-                          </div>
-                          <div>
-                            <h4 className="font-bold">User Name</h4>
-                            <span className="text-xs text-gray-400">
-                              2 days ago
-                            </span>
-                          </div>
-                        </div>
-                        <div className="flex items-center space-x-2 text-yellow-500">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 512 512"
-                            className="w-5 h-5 fill-current"
-                          >
-                            <path d="M494,198.671a40.536,40.536,0,0,0-32.174-27.592L345.917,152.242,292.185,47.828a40.7,40.7,0,0,0-72.37,0L166.083,152.242,50.176,171.079a40.7,40.7,0,0,0-22.364,68.827l82.7,83.368-17.9,116.055a40.672,40.672,0,0,0,58.548,42.538L256,428.977l104.843,52.89a40.69,40.69,0,0,0,58.548-42.538l-17.9-116.055,82.7-83.368A40.538,40.538,0,0,0,494,198.671Zm-32.53,18.7L367.4,312.2l20.364,132.01a8.671,8.671,0,0,1-12.509,9.088L256,393.136,136.744,453.3a8.671,8.671,0,0,1-12.509-9.088L144.6,312.2,50.531,217.37a8.7,8.7,0,0,1,4.778-14.706L187.15,181.238,248.269,62.471a8.694,8.694,0,0,1,15.462,0L324.85,181.238l131.841,21.426A8.7,8.7,0,0,1,461.469,217.37Z"></path>
-                          </svg>
-                          <span className="text-xl font-bold">4.5</span>
-                        </div>
-                      </div>
-                      <div className="p-4 space-y-2 text-sm text-gray-400">
-                        <p>
-                          Vivamus sit amet turpis leo. Praesent varius eleifend
-                          elit, eu dictum lectus consequat vitae. Etiam ut dolor
-                          id justo fringilla finibus.
-                        </p>
-                      </div>
-                    </div>
-                    {/* REVIEW CARD ENDS */}
+                    <h3 className="text-lg font-semibold text-nowrap">
+                      Food Reviews
+                    </h3>
+                    {userReviews.map((eachReview) => (
+                      <LoadFoodReviewCard
+                        key={eachReview._id}
+                        eachReview={eachReview}
+                      />
+                    ))}
                   </div>
                 </div>
               </div>
