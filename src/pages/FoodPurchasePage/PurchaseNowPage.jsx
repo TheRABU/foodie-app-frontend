@@ -214,6 +214,7 @@ const PurchaseNowPage = () => {
                     type="date"
                     name="date"
                     id="date"
+                    required={true}
                     className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                   />
                 </div>
@@ -230,6 +231,7 @@ const PurchaseNowPage = () => {
                     type="time"
                     name="time"
                     id="time"
+                    required={true}
                     className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                   />
                 </div>
@@ -248,6 +250,7 @@ const PurchaseNowPage = () => {
                       name="area"
                       id="area"
                       placeholder="Enter area"
+                      required={true}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
@@ -259,6 +262,7 @@ const PurchaseNowPage = () => {
                       name="city"
                       id="city"
                       placeholder="Enter city"
+                      required={true}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
@@ -270,6 +274,7 @@ const PurchaseNowPage = () => {
                       name="state"
                       id="state"
                       placeholder="Enter state"
+                      required={true}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
@@ -281,6 +286,7 @@ const PurchaseNowPage = () => {
                       name="postCode"
                       id="post-code"
                       placeholder="Post Code"
+                      required={true}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
@@ -291,7 +297,7 @@ const PurchaseNowPage = () => {
             <div>
               <button
                 type="submit"
-                className="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+                className="hover:shadow-form w-full rounded-md bg-[#FF204E] py-3 px-8 text-center text-base font-semibold text-white outline-none"
               >
                 Order Now
               </button>

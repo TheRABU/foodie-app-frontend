@@ -18,7 +18,7 @@ const MyDashBoard = () => {
               className="w-full xl:h-[20rem] lg:h-[22rem] md:h-[16rem] sm:h-[13rem] xs:h-[9.5rem]"
             />
 
-            <div className="w-full mx-auto flex justify-center">
+            <div className="w-full py-5 mx-auto flex justify-center">
               <img
                 src={user?.photoURL}
                 alt="User Profile"
@@ -26,7 +26,7 @@ const MyDashBoard = () => {
               />
             </div>
 
-            <div className="xl:w-[80%] lg:w-[90%] md:w-[94%] sm:w-[96%] xs:w-[92%] mx-auto flex flex-col gap-4 justify-center items-center relative xl:-top-[6rem] lg:-top-[6rem] md:-top-[4rem] sm:-top-[3rem] xs:-top-[2.2rem]">
+            <div className="xl:w-[80%] lg:w-[90%] md:w-[94%] sm:w-[96%] xs:w-[92%] mx-auto px-5 lg:px-0 flex flex-col gap-4 justify-center items-center relative xl:-top-[6rem] lg:-top-[6rem] md:-top-[4rem] sm:-top-[3rem] xs:-top-[2.2rem]">
               <h1 className="text-center text-gray-800  text-4xl font-serif">
                 Email Address: {user?.email}
               </h1>
@@ -130,7 +130,7 @@ const MyDashBoard = () => {
                 </div>
 
                 <div className="xl:w-1/4 xl:h-32 lg:w-1/5 lg:h-32 md:w-1/5 md:h-28 sm:w-1/3 sm:h-[5rem] xs:w-1/3 xs:h-[4rem] flex justify-center items-center rounded-sm text-center text-lg px-6 py-4 border-2 border-dashed border-gray-300  dark:border-2 dark:border-dashed dark:border-gray-700">
-                  <Link to="/gallery">Review about Foodie bite</Link>
+                  <Link to="/review">Review Foodie bite</Link>
                 </div>
 
                 <div className="xl:w-1/4 xl:h-32 lg:w-1/5 lg:h-32 md:w-1/5 md:h-28 sm:w-1/3 sm:h-[5rem] xs:w-1/3 xs:h-[4rem] flex justify-center items-center rounded-sm text-center text-lg px-6 py-4 border-2 border-dashed border-gray-300  dark:border-2 dark:border-dashed dark:border-gray-700">

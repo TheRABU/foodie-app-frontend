@@ -99,7 +99,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/add-review-gallery",
+        path: "/review",
         element: (
           <PrivateRoutes>
             <AddReviewGallery />,
