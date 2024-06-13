@@ -8,7 +8,7 @@ const TopFoodSection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/foods")
+    fetch("https://foodie-bite-server.vercel.app/api/foods")
       .then((res) => res.json())
       .then((data) => {
         setFoodItems(data);

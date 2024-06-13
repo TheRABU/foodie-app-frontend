@@ -25,7 +25,7 @@ const AddReviewGallery = () => {
       userProfile,
     };
     axios
-      .post("http://localhost:5000/clientReview", clientReview)
+      .post("https://foodie-bite-server.vercel.app/clientReview", clientReview)
       .then((res) => {
         if (res.data.insertedId) {
           Swal.fire({

@@ -23,7 +23,7 @@ const AddFoodRequest = () => {
       description,
     };
     axios
-      .post("http://localhost:5000/addRequest", customRequest)
+      .post("https://foodie-bite-server.vercel.app/addRequest", customRequest)
       .then((response) => {
         if (response.data.insertedId) {
           Swal.fire({

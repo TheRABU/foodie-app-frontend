@@ -11,7 +11,7 @@ const MyAddedItems = () => {
   const [myItems, setMyItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const url = `http://localhost:5000/myRequest/${user?.email}`;
+  const url = `https://foodie-bite-server.vercel.app/myRequest/${user?.email}`;
   useEffect(() => {
     axios
       .get(url)
@@ -39,7 +39,7 @@ const MyAddedItems = () => {
       .then((result) => {
         if (result.isConfirmed) {
           axios
-            .delete(`http://localhost:5000/request/${_id}`)
+            .delete(`https://foodie-bite-server.vercel.app/request/${_id}`)
             .then((response) => {
               if (response.status === 200) {
                 const remaining = myItems.filter((ord) => ord._id !== _id);
@@ -75,9 +75,9 @@ const MyAddedItems = () => {
   // GET REQUEST FROM DB BY USR EMAIL
   return (
     <>
-    <Helmet>
-      <title>Foodie Bite | My added items</title>
-    </Helmet>
+      <Helmet>
+        <title>Foodie Bite | My added items</title>
+      </Helmet>
       {/* RIGHT SIDE CONTENT */}
       <div className="w-full px-5 h-full bg-[#ffffff]">
         <h2 className="text-center text-3xl ">My Added Custom food requests</h2>

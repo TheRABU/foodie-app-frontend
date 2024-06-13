@@ -10,7 +10,7 @@ const MyFoodItemReviews = () => {
   const [myReviews, setMyReviews] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const url = `http://localhost:5000/myFoodReview/${user?.email}`;
+  const url = `https://foodie-bite-server.vercel.app/myFoodReview/${user?.email}`;
   useEffect(() => {
     axios
       .get(url)
@@ -36,7 +36,7 @@ const MyFoodItemReviews = () => {
       .then((result) => {
         if (result.isConfirmed) {
           axios
-            .delete(`http://localhost:5000/myFoodReview/${_id}`)
+            .delete(`https://foodie-bite-server.vercel.app/myFoodReview/${_id}`)
             .then((response) => {
               if (response.status === 200) {
                 const remaining = myReviews.filter((ord) => ord._id !== _id);

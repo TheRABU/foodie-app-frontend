@@ -27,7 +27,9 @@ const AllFoods = () => {
   }, []);
   const fetchInitialFoods = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/foods");
+      const response = await axios.get(
+        "https://foodie-bite-server.vercel.app/api/foods"
+      );
       setFoods(response.data);
     } catch (error) {
       console.error("Error fetching initial foods:", error);
@@ -42,7 +44,7 @@ const AllFoods = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/foods?search=${searchValue}`
+        `https://foodie-bite-server.vercel.app/api/foods?search=${searchValue}`
       );
       setFoods(response.data);
     } catch (error) {

@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
         path: "/single-food/:id",
         element: <SingleFoodPage />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/foods/${params.id}`),
+          fetch(`https://foodie-bite-server.vercel.app/api/foods/${params.id}`),
       },
       {
         path: "/purchase/:id",
@@ -46,7 +46,7 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/foods/${params.id}`),
+          fetch(`https://foodie-bite-server.vercel.app/api/foods/${params.id}`),
       },
       {
         path: "/sign-up",
