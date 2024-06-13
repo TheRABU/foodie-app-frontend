@@ -12,6 +12,7 @@ const AddReviewGallery = () => {
     const form = e.target;
     const name = user?.displayName;
     const email = user?.email;
+    const userProfile = user?.photoURL;
     const reviewDescription = form.reviewDescription.value;
     const imgUrl = form.imgUrl.value;
 
@@ -20,6 +21,7 @@ const AddReviewGallery = () => {
       email,
       reviewDescription,
       imgUrl,
+      userProfile,
     };
     axios
       .post("http://localhost:5000/clientReview", clientReview)

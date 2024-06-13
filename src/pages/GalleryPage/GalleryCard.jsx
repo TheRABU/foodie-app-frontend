@@ -1,27 +1,34 @@
+import { Flip } from "../../components/FlipCard/Flip";
+
 const GalleryCard = ({ singleReview }) => {
-  const { name, email, reviewDescription, imgUrl } = singleReview;
+  const { name, email, reviewDescription, imgUrl, userProfile } = singleReview;
+
+  const frontImage =
+    "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+  // the image user posted
+  const backImage = imgUrl; // user profile
   return (
     <>
       <div className="bg-[#FFF7FC] px-12 py-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-blue-600 ">
         <div className="flex flex-col sm:-mx-4 sm:flex-row">
-          <img
+          {/* <img
             className="flex-shrink-0 object-cover w-24 h-24 rounded-full sm:mx-4 ring-4 ring-gray-300"
             src={imgUrl}
             alt=""
-          />
-
+          /> */}
+          <Flip frontImage={frontImage} backImage={backImage} />
           <div className="mt-4 sm:mx-4 sm:mt-0">
-            <h1 className="text-xl font-semibold text-gray-700 capitalize md:text-2xl dark:text-white group-hover:text-white">
+            <h1 className="text-xl font-semibold text-gray-700 capitalize md:text-2xl  group-hover:text-white">
               {reviewDescription}
             </h1>
 
-            <p className="mt-2 text-gray-500 capitalize dark:text-gray-300 group-hover:text-gray-300">
+            <p className="mt-2 text-gray-500 capitalize  group-hover:text-gray-300">
               {email}
             </p>
           </div>
         </div>
 
-        <p className="mt-4 text-gray-500 capitalize dark:text-gray-300 group-hover:text-gray-300">
+        <p className="mt-4 text-gray-500 capitalize  group-hover:text-gray-300">
           {name}
         </p>
 
