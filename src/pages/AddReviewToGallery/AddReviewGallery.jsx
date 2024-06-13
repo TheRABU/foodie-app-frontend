@@ -1,4 +1,45 @@
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthenticateProvider";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+
 const AddReviewGallery = () => {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleClientReview = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = user?.displayName;
+    const email = user?.email;
+    const reviewDescription = form.reviewDescription.value;
+    const imgUrl = form.imgUrl.value;
+
+    const clientReview = {
+      name,
+      email,
+      reviewDescription,
+      imgUrl,
+    };
+    axios
+      .post("http://localhost:5000/clientReview", clientReview)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Thank you for your review",
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(() => {
+            navigate("/");
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
   // POST REVIEWS ABOUT FOODIE BITE
   return (
     <>
@@ -11,18 +52,20 @@ const AddReviewGallery = () => {
             Write a Review
           </h2>
 
-          <form>
+          <form onSubmit={handleClientReview}>
             <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
               <div>
                 <label
                   className="text-gray-700 dark:text-gray-200"
                   htmlFor="username"
                 >
-                  Username
+                  Name
                 </label>
                 <input
                   id="username"
+                  name="name"
                   type="text"
+                  disabled={true}
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                 />
               </div>
@@ -37,6 +80,7 @@ const AddReviewGallery = () => {
                 <input
                   id="emailAddress"
                   type="email"
+                  disabled={true}
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                 />
               </div>
@@ -44,13 +88,15 @@ const AddReviewGallery = () => {
               <div>
                 <label
                   className="text-gray-700 dark:text-gray-200"
-                  htmlFor="password"
+                  htmlFor="reviewDescription"
                 >
-                  Password
+                  Review Description
                 </label>
                 <input
-                  id="password"
-                  type="password"
+                  id="reviewDescription"
+                  name="reviewDescription"
+                  required={true}
+                  type="text"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                 />
               </div>
@@ -60,19 +106,25 @@ const AddReviewGallery = () => {
                   className="text-gray-700 dark:text-gray-200"
                   htmlFor="passwordConfirmation"
                 >
-                  Password Confirmation
+                  Img url
                 </label>
                 <input
-                  id="passwordConfirmation"
-                  type="password"
+                  id="imgUrl"
+                  name="imgUrl"
+                  type="text"
+                  required={true}
+                  placeholder="https://imgbb.com links"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                 />
               </div>
             </div>
 
             <div className="flex justify-end mt-6">
-              <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-                Save
+              <button
+                type="submit"
+                className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+              >
+                Post Review
               </button>
             </div>
           </form>

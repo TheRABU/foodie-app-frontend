@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const MyDashBoard = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
 
   return (
     <>

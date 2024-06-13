@@ -16,7 +16,6 @@ const MyFoodItemReviews = () => {
       .then((response) => {
         setLoading(false);
         setMyReviews(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.log("Error occurred during fetching your request", error);
@@ -46,7 +45,6 @@ const MyFoodItemReviews = () => {
                   "Your order has been deleted.",
                   "success"
                 );
-                console.log(response.data);
               } else {
                 console.log("Failed to delete order");
               }
@@ -79,7 +77,7 @@ const MyFoodItemReviews = () => {
             key={oneReview._id}
             oneReview={oneReview}
             setMyReviews={setMyReviews}
-            handleDeleteRequestedItem={handleDeleteReview}
+            handleDeleteReview={handleDeleteReview}
           />
         ))}
       </section>

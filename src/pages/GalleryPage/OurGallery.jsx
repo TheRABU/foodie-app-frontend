@@ -1,9 +1,24 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthenticateProvider";
+import axios from "axios";
+import GalleryCard from "./GalleryCard";
 
 const OurGallery = () => {
   const { user } = useContext(AuthContext);
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/allClientReviews")
+      .then((res) => {
+        setReviews(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <>
       <div className="bg-[#F9F5EB]">
@@ -35,7 +50,7 @@ const OurGallery = () => {
             <section className="">
               <div className="container px-6 py-10 mx-auto">
                 <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-2">
-                  <div className="bg-[#FFF7FC] px-12 py-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-blue-600 ">
+                  {/* <div className="bg-[#FFF7FC] px-12 py-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-blue-600 ">
                     <div className="flex flex-col sm:-mx-4 sm:flex-row">
                       <img
                         className="flex-shrink-0 object-cover w-24 h-24 rounded-full sm:mx-4 ring-4 ring-gray-300"
@@ -106,9 +121,14 @@ const OurGallery = () => {
                         </svg>
                       </a>
                     </div>
-                  </div>
-
-                  <div className="bg-[#FFF7FC] px-12 py-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-blue-600 dark:border-gray-700 dark:hover:border-transparent">
+                  </div> */}
+                  {reviews.map((singleReview) => (
+                    <GalleryCard
+                      key={singleReview._id}
+                      singleReview={singleReview}
+                    />
+                  ))}
+                  {/* <div className="bg-[#FFF7FC] px-12 py-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-blue-600 dark:border-gray-700 dark:hover:border-transparent">
                     <div className="flex flex-col sm:-mx-4 sm:flex-row">
                       <img
                         className="flex-shrink-0 object-cover w-24 h-24 rounded-full sm:mx-4 ring-4 ring-gray-300"
@@ -325,7 +345,7 @@ const OurGallery = () => {
                         </svg>
                       </a>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </section>
