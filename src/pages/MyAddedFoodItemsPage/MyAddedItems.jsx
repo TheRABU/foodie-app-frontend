@@ -4,6 +4,7 @@ import { AuthContext } from "../../providers/AuthenticateProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
 import AddItemCard from "./AddItemCard";
+import { Helmet } from "react-helmet-async";
 
 const MyAddedItems = () => {
   const { user } = useContext(AuthContext);
@@ -74,6 +75,9 @@ const MyAddedItems = () => {
   // GET REQUEST FROM DB BY USR EMAIL
   return (
     <>
+    <Helmet>
+      <title>Foodie Bite | My added items</title>
+    </Helmet>
       {/* RIGHT SIDE CONTENT */}
       <div className="w-full px-5 h-full bg-[#ffffff]">
         <h2 className="text-center text-3xl ">My Added Custom food requests</h2>

@@ -1,12 +1,16 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthenticateProvider";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const MyDashBoard = () => {
   const { user } = useContext(AuthContext);
 
   return (
     <>
+      <Helmet>
+        <title>Foodie Bite | Dashboard</title>
+      </Helmet>
       {/* RIGHT SIDE CONTENT */}
       <div className="w-full h-full bg-[#ffffff]">
         <section className="w-full overflow-hidden ">

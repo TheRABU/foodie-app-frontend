@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import FoodCollectionCard from "./FoodCollectionGrid/FoodCollectionCard";
 import Skeleton from "../../components/Skeleton/Skeleton";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
+import AOS from "aos";
+import "aos/dist/aos.css";
 const AllFoods = () => {
   const foodData = useLoaderData();
   const [foods, setFoods] = useState(foodData);
@@ -11,6 +14,16 @@ const AllFoods = () => {
 
   useEffect(() => {
     fetchInitialFoods();
+    AOS.init({
+      offset: 200,
+      duration: 600,
+      easing: "ease-in-sine",
+      delay: 100,
+      disable: window.innerWidth < 1024,
+    });
+
+    AOS.init();
+    AOS.refresh();
   }, []);
   const fetchInitialFoods = async () => {
     try {
@@ -45,6 +58,9 @@ const AllFoods = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Foodie Bite | All Foods</title>
+      </Helmet>
       <div className="h-full py-10 bg-[#F9F5EB]">
         <h2 className="text-center text-7xl font-bold text-black">
           All <span className="text-[#FF004D]">foods</span>
@@ -90,7 +106,10 @@ const AllFoods = () => {
           </>
         </div>
         {/* Foods Collection Grid */}
-        <div className="mx-auto h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 px-10 lg:px-20 gap-10">
+        <div
+          data-aos="fade-up"
+          className=" mx-auto h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 px-10 lg:px-20 gap-10"
+        >
           {Array.isArray(foods) && foods.length > 0 ? (
             foods.map((food) => (
               <FoodCollectionCard key={food._id} food={food} />

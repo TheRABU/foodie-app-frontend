@@ -2,10 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { MdOutlineReviews } from "react-icons/md";
 import { AuthContext } from "../../providers/AuthenticateProvider";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 import Swal from "sweetalert2";
 import axios from "axios";
 import LoadFoodReviewCard from "./LoadFoodReviewCard";
+import { Helmet } from "react-helmet-async";
 const SingleFoodPage = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -50,6 +52,16 @@ const SingleFoodPage = () => {
     };
 
     fetchData();
+    AOS.init({
+      offset: 200,
+      duration: 600,
+      easing: "ease-in-sine",
+      delay: 100,
+      disable: window.innerWidth < 1024,
+    });
+
+    AOS.init();
+    AOS.refresh();
   }, [url]);
 
   // post review
@@ -96,8 +108,11 @@ const SingleFoodPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Foodie Bite | View Details</title>
+      </Helmet>
       <div>
-        <section className="bg-[#ffffff] px-4 lg:px-28">
+        <section data-aos="fade-left" className="bg-[#ffffff] px-4 lg:px-28">
           <h3 className="text-3xl pt-5 font-serif text-center">{FoodName}</h3>
           <div className="container  py-10 mx-auto">
             <div className="lg:flex lg:-mx-6">

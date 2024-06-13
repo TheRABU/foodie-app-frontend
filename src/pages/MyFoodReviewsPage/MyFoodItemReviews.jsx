@@ -3,6 +3,7 @@ import { AuthContext } from "../../providers/AuthenticateProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
 import MyFoodReviewCard from "./MyFoodReviewCard";
+import { Helmet } from "react-helmet-async";
 
 const MyFoodItemReviews = () => {
   const { user } = useContext(AuthContext);
@@ -70,6 +71,9 @@ const MyFoodItemReviews = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Foodie Bite | My reviews of Food items</title>
+      </Helmet>
       <h2 className="text-center text-3xl ">My Added Food Reviews</h2>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto px-3 lg:px-20">
         {myReviews.map((oneReview) => (

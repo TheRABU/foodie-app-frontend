@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthenticateProvider";
 import axios from "axios";
 import GalleryCard from "./GalleryCard";
-
+import { Helmet } from "react-helmet-async";
+import AOS from "aos";
+import "aos/dist/aos.css";
 const OurGallery = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
@@ -17,10 +19,23 @@ const OurGallery = () => {
       .catch((error) => {
         console.log(error);
       });
+    AOS.init({
+      offset: 200,
+      duration: 600,
+      easing: "ease-in-sine",
+      delay: 100,
+      disable: window.innerWidth < 1024,
+    });
+
+    AOS.init();
+    AOS.refresh();
   }, [url]);
 
   return (
     <>
+      <Helmet>
+        <title>Foodie Bite | Gallery</title>
+      </Helmet>
       <div className="bg-[#F9F5EB]">
         <div className="text-center text-3xl font-mono font-semibold">
           Gallery of our customer reviews
@@ -54,7 +69,7 @@ const OurGallery = () => {
                 </Link>
               )}
             </div>
-            <section className="">
+            <section data-aos="fade-up-right" className="">
               <div className="container px-6 py-10 mx-auto">
                 <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-2 lg:px-10">
                   {reviews.map((singleReview) => (

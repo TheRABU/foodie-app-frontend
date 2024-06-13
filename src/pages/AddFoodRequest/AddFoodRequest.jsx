@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthenticateProvider";
-
+import { Helmet } from "react-helmet-async";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -43,6 +43,9 @@ const AddFoodRequest = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Foodie bite | Add request</title>
+      </Helmet>
       <div className="bg-[#ffffff] h-auto mx-auto py-10 px-5 md:px-20 lg:px-32">
         <div className="text-center w-full md:w-4/6 mx-auto">
           <h1 className="text-xl md:text-3xl text-center font-serif text-black font-semibold">

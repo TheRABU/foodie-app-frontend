@@ -3,6 +3,7 @@ import { AuthContext } from "../../providers/AuthenticateProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AddReviewGallery = () => {
   const { user } = useContext(AuthContext);
@@ -45,6 +46,9 @@ const AddReviewGallery = () => {
   // POST REVIEWS ABOUT FOODIE BITE
   return (
     <>
+      <Helmet>
+        <title>Add Review</title>
+      </Helmet>
       <div className="h-full bg-[#ffffff] mx-auto px-8 lg:px-20 my-10 lg:my-20">
         <h1 className="text-2xl text-center mb-5">
           Client review about Foodie Bite team

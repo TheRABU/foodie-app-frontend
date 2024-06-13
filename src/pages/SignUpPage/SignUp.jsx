@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
   const [showPass, setShowPass] = useState(false);
@@ -91,6 +92,9 @@ const SignUp = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Foodie Bite | Sign Up</title>
+      </Helmet>
       <section className="bg-white ">
         <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
           <form onSubmit={handleSignUp} className="w-full max-w-md">
