@@ -12,7 +12,7 @@ const TopFoodSection = () => {
       .then((res) => res.json())
       .then((data) => {
         setFoodItems(data);
-        console.log(data);
+
         setLoading(false);
       });
   }, []);
