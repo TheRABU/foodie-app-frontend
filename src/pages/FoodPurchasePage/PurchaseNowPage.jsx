@@ -56,7 +56,7 @@ const PurchaseNowPage = () => {
     };
 
     axios
-      .post("https://foodie-bite-server.vercel.app/order", orderValue)
+      .post("https://foodie-bite.sifatulrabbi.com/order", orderValue)
       .then((response) => {
         if (response.data.insertedId) {
           Swal.fire({

@@ -28,7 +28,7 @@ const AllFoods = () => {
   const fetchInitialFoods = async () => {
     try {
       const response = await axios.get(
-        "https://foodie-bite-server.vercel.app/api/foods"
+        "https://foodie-bite.sifatulrabbi.com/api/foods"
       );
       setFoods(response.data);
     } catch (error) {
@@ -44,7 +44,7 @@ const AllFoods = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://foodie-bite-server.vercel.app/api/foods?search=${searchValue}`
+        `https://foodie-bite.sifatulrabbi.com/api/foods?search=${searchValue}`
       );
       setFoods(response.data);
     } catch (error) {

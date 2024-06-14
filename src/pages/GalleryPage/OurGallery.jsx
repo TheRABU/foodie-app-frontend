@@ -9,7 +9,7 @@ import "aos/dist/aos.css";
 const OurGallery = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
-  const url = "https://foodie-bite-server.vercel.app/allClientReviews";
+  const url = "https://foodie-bite.sifatulrabbi.com/allClientReviews";
   useEffect(() => {
     axios
       .get(url)

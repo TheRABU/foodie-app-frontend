@@ -11,7 +11,7 @@ const MyAddedItems = () => {
   const [myItems, setMyItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const url = `https://foodie-bite-server.vercel.app/myRequest/${user?.email}`;
+  const url = `https://foodie-bite.sifatulrabbi.com/myRequest/${user?.email}`;
   useEffect(() => {
     axios
       .get(url)
@@ -39,7 +39,7 @@ const MyAddedItems = () => {
       .then((result) => {
         if (result.isConfirmed) {
           axios
-            .delete(`https://foodie-bite-server.vercel.app/request/${_id}`)
+            .delete(`https://foodie-bite.sifatulrabbi.com/request/${_id}`)
             .then((response) => {
               if (response.status === 200) {
                 const remaining = myItems.filter((ord) => ord._id !== _id);

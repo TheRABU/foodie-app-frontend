@@ -8,10 +8,11 @@ const TopFoodSection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://foodie-bite-server.vercel.app/api/foods")
+    fetch("https://foodie-bite.sifatulrabbi.com/api/foods")
       .then((res) => res.json())
       .then((data) => {
         setFoodItems(data);
+        console.log(data);
         setLoading(false);
       });
   }, []);

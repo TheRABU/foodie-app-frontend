@@ -39,7 +39,7 @@ const SingleFoodPage = () => {
   //   fetchData();
   // }, []);
 
-  const url = `https://foodie-bite-server.vercel.app/foodReview/${_id}`;
+  const url = `https://foodie-bite.sifatulrabbi.com/foodReview/${_id}`;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -85,7 +85,7 @@ const SingleFoodPage = () => {
 
     try {
       const res = await axios.post(
-        "https://foodie-bite-server.vercel.app/addFoodReview",
+        "https://foodie-bite.sifatulrabbi.com/addFoodReview",
         payload
       );
       if (res.data.insertedId) {

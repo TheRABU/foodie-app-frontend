@@ -23,7 +23,7 @@ const AddFoodRequest = () => {
       description,
     };
     axios
-      .post("https://foodie-bite-server.vercel.app/addRequest", customRequest)
+      .post("https://foodie-bite.sifatulrabbi.com/addRequest", customRequest)
       .then((response) => {
         if (response.data.insertedId) {
           Swal.fire({
@@ -38,7 +38,7 @@ const AddFoodRequest = () => {
         }
       })
       .catch((error) => {
-        console.log("Sorry could not Add your request at the moment");
+        console.log("Sorry could not Add your request at the moment", error);
       });
   };
   return (
