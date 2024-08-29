@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="px-4 divide-y h-[306px] bg-[#21243D]  text-gray-100 ">
+    <footer className="px-4 divide-y h-full md:h-[306px] bg-[#21243D]  text-gray-100 ">
       <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
         <div className="lg:w-1/3">
           <Link to="/">
             <h1 className="text-3xl text-[#F9FBE7] font-bold">Foodie Bite</h1>
           </Link>
         </div>
-        <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
+        <div className="grid h-full grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
           <div className="space-y-3">
             <h3 className="tracking-wide uppercase text-gray-50 ">Product</h3>
             <ul className="space-y-1">

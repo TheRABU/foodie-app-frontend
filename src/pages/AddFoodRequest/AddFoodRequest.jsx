@@ -23,7 +23,10 @@ const AddFoodRequest = () => {
       description,
     };
     axios
-      .post("https://foodie-bite.sifatulrabbi.com/addRequest", customRequest)
+      .post(
+        "https://foodie-app-backend-production.up.railway.app/addRequest",
+        customRequest
+      )
       .then((response) => {
         if (response.data.insertedId) {
           Swal.fire({

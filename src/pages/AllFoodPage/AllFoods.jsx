@@ -14,21 +14,21 @@ const AllFoods = () => {
 
   useEffect(() => {
     fetchInitialFoods();
-    AOS.init({
-      offset: 200,
-      duration: 600,
-      easing: "ease-in-sine",
-      delay: 100,
-      disable: window.innerWidth < 1024,
-    });
+    // AOS.init({
+    //   offset: 200,
+    //   duration: 600,
+    //   easing: "ease-in-sine",
+    //   delay: 100,
+    //   disable: window.innerWidth < 1024,
+    // });
 
-    AOS.init();
-    AOS.refresh();
+    // AOS.init();
+    // AOS.refresh();
   }, []);
   const fetchInitialFoods = async () => {
     try {
       const response = await axios.get(
-        "https://foodie-bite.sifatulrabbi.com/api/foods"
+        "https://foodie-app-backend-production.up.railway.app/api/foods"
       );
       setFoods(response.data);
     } catch (error) {
@@ -44,7 +44,7 @@ const AllFoods = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://foodie-bite.sifatulrabbi.com/api/foods?search=${searchValue}`
+        `https://foodie-app-backend-production.up.railway.app/api/foods?search=${searchValue}`
       );
       setFoods(response.data);
     } catch (error) {
@@ -108,10 +108,7 @@ const AllFoods = () => {
           </>
         </div>
         {/* Foods Collection Grid */}
-        <div
-          data-aos="fade-up"
-          className=" mx-auto h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 px-10 lg:px-20 gap-10"
-        >
+        <div className=" mx-auto h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 px-14 lg:px-20 gap-10">
           {Array.isArray(foods) && foods.length > 0 ? (
             foods.map((food) => (
               <FoodCollectionCard key={food._id} food={food} />

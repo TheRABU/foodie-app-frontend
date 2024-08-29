@@ -11,7 +11,7 @@ const MyOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const url = `https://foodie-bite.sifatulrabbi.com/myOrders/${user.email}`;
+  const url = `https://foodie-app-backend-production.up.railway.app/myOrders/${user.email}`;
   useEffect(() => {
     axios
       .get(url)
@@ -52,7 +52,9 @@ const MyOrders = () => {
       .then((result) => {
         if (result.isConfirmed) {
           axios
-            .delete(`https://foodie-bite.sifatulrabbi.com/order/${_id}`)
+            .delete(
+              `https://foodie-app-backend-production.up.railway.app/order/${_id}`
+            )
             .then((response) => {
               if (response.status === 200) {
                 const remaining = orders.filter((ord) => ord._id !== _id);

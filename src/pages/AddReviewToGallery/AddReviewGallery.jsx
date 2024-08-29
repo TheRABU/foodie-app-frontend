@@ -25,7 +25,10 @@ const AddReviewGallery = () => {
       userProfile,
     };
     axios
-      .post("https://foodie-bite.sifatulrabbi.com/clientReview", clientReview)
+      .post(
+        "https://foodie-app-backend-production.up.railway.app/clientReview",
+        clientReview
+      )
       .then((res) => {
         if (res.data.insertedId) {
           Swal.fire({

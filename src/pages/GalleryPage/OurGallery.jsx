@@ -9,7 +9,8 @@ import "aos/dist/aos.css";
 const OurGallery = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
-  const url = "https://foodie-bite.sifatulrabbi.com/allClientReviews";
+  const url =
+    "https://foodie-app-backend-production.up.railway.app/allClientReviews";
   useEffect(() => {
     axios
       .get(url)

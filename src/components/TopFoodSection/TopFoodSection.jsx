@@ -8,9 +8,10 @@ const TopFoodSection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://foodie-bite.sifatulrabbi.com/api/foods")
+    fetch("https://foodie-app-backend-production.up.railway.app/api/foods")
       .then((res) => res.json())
       .then((data) => {
+        console.log("Response from backend", data);
         setFoodItems(data);
 
         setLoading(false);
@@ -30,7 +31,7 @@ const TopFoodSection = () => {
         Our Top <br />
         <span className="text-[#FF004D]">Food</span> Items
       </h3>
-      <div className="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-0 lg:py-8 px-4 md:px-16 lg:px-32">
+      <div className="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-0 lg:py-8 px-14 md:px-16 lg:px-32">
         {foodItems.slice(0, 6).map((food, idx) => (
           <FoodCard key={idx} food={food} />
         ))}
