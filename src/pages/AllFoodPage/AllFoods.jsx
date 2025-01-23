@@ -6,13 +6,28 @@ import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const AllFoods = () => {
   const foodData = useLoaderData();
   const [foods, setFoods] = useState(foodData);
   const [Loading, setLoading] = useState(true);
   const [searchValue, setSearchValue] = useState("");
+  const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
+    const fetchInitialFoods = async () => {
+      try {
+        const response = await axiosPublic.get("/api/foods");
+        setFoods(response.data);
+      } catch (error) {
+        console.error("Error fetching initial foods:", error);
+      } finally {
+        setTimeout(() => {
+          setLoading(false);
+        }, 300);
+      }
+    };
+
     fetchInitialFoods();
     // AOS.init({
     //   offset: 200,
@@ -24,27 +39,13 @@ const AllFoods = () => {
 
     // AOS.init();
     // AOS.refresh();
-  }, []);
-  const fetchInitialFoods = async () => {
-    try {
-      const response = await axios.get(
-        "https://foodie-app-backend-production.up.railway.app/api/foods"
-      );
-      setFoods(response.data);
-    } catch (error) {
-      console.error("Error fetching initial foods:", error);
-    } finally {
-      setTimeout(() => {
-        setLoading(false);
-      }, 300);
-    }
-  };
+  }, [axiosPublic]);
 
   const handleSearch = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(
-        `https://foodie-app-backend-production.up.railway.app/api/foods?search=${searchValue}`
+      const response = await axiosPublic.get(
+        `/api/foods?search=${searchValue}`
       );
       setFoods(response.data);
     } catch (error) {

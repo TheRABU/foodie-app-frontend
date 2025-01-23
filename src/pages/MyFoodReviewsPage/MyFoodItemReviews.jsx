@@ -1,27 +1,40 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthenticateProvider";
-import axios from "axios";
+
 import Swal from "sweetalert2";
 import MyFoodReviewCard from "./MyFoodReviewCard";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const MyFoodItemReviews = () => {
   const { user } = useContext(AuthContext);
   const [myReviews, setMyReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
 
-  const url = `https://foodie-app-backend-production.up.railway.app/myFoodReview/${user?.email}`;
+  // const url = `http://localhost:5000/myFoodReview/${user?.email}`;
   useEffect(() => {
-    axios
-      .get(url)
-      .then((response) => {
+    const handleFetchData = async () => {
+      try {
+        const res = await axiosPublic.get(`/myFoodReview/${user?.email}`);
+        setMyReviews(res.data);
         setLoading(false);
-        setMyReviews(response.data);
-      })
-      .catch((error) => {
-        console.log("Error occurred during fetching your request", error);
-      });
-  }, [url]);
+      } catch (error) {
+        console.log(error.message);
+        throw new Error();
+      }
+    };
+    // axios
+    //   .get(url)
+    //   .then((response) => {
+    //     setLoading(false);
+    //     setMyReviews(response.data);
+    // })
+    // .catch((error) => {
+    //   console.log("Error occurred during fetching your request", error);
+    // });
+    handleFetchData();
+  }, [user?.email, axiosPublic]);
 
   const handleDeleteReview = (_id) => {
     Swal.fire({
@@ -35,23 +48,15 @@ const MyFoodItemReviews = () => {
     })
       .then((result) => {
         if (result.isConfirmed) {
-          axios
-            .delete(
-              `https://foodie-app-backend-production.up.railway.app/myFoodReview/${_id}`
-            )
-            .then((response) => {
-              if (response.status === 200) {
-                const remaining = myReviews.filter((ord) => ord._id !== _id);
-                setMyReviews(remaining);
-                Swal.fire(
-                  "Deleted!",
-                  "Your order has been deleted.",
-                  "success"
-                );
-              } else {
-                console.log("Failed to delete order");
-              }
-            });
+          axiosPublic.delete(`/myFoodReview/${_id}`).then((response) => {
+            if (response.status === 200) {
+              const remaining = myReviews.filter((ord) => ord._id !== _id);
+              setMyReviews(remaining);
+              Swal.fire("Deleted!", "Your order has been deleted.", "success");
+            } else {
+              console.log("Failed to delete order");
+            }
+          });
         }
       })
       .catch((error) => {

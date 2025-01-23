@@ -7,7 +7,8 @@ import {
 } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthenticateProvider";
 import Swal from "sweetalert2";
-import axios from "axios";
+
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const PurchaseNowPage = () => {
   const foodDetail = useLoaderData();
@@ -16,6 +17,7 @@ const PurchaseNowPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [counter, setCounter] = useState(1);
+  const axiosPublic = useAxiosPublic();
 
   // increment decrement button handlers
   const incrementCount = () => {
@@ -55,8 +57,8 @@ const PurchaseNowPage = () => {
       orderQuantity: counter,
     };
 
-    axios
-      .post("https://foodie-bite.sifatulrabbi.com/order", orderValue)
+    axiosPublic
+      .post("/order", orderValue)
       .then((response) => {
         if (response.data.insertedId) {
           Swal.fire({

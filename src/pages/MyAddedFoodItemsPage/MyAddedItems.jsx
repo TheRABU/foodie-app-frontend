@@ -1,28 +1,32 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthenticateProvider";
 
-import axios from "axios";
 import Swal from "sweetalert2";
 import AddItemCard from "./AddItemCard";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const MyAddedItems = () => {
   const { user } = useContext(AuthContext);
   const [myItems, setMyItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
 
-  const url = `https://foodie-app-backend-production.up.railway.app/myRequest/${user?.email}`;
+  // const url = `http://localhost:5000/myRequest/${user?.email}`;
   useEffect(() => {
-    axios
-      .get(url)
+    axiosPublic
+      .get(`/myRequest/${user?.email}`)
       .then((response) => {
         setLoading(false);
         setMyItems(response.data);
       })
       .catch((error) => {
-        console.log("Error occurred during fetching your request");
+        console.log(
+          "Error occurred during fetching your request",
+          error.message
+        );
       });
-  }, [url]);
+  }, [user?.email, axiosPublic]);
 
   // handleDeleteRequestedItem
 
@@ -38,23 +42,15 @@ const MyAddedItems = () => {
     })
       .then((result) => {
         if (result.isConfirmed) {
-          axios
-            .delete(
-              `https://foodie-app-backend-production.up.railway.app/request/${_id}`
-            )
-            .then((response) => {
-              if (response.status === 200) {
-                const remaining = myItems.filter((ord) => ord._id !== _id);
-                setMyItems(remaining);
-                Swal.fire(
-                  "Deleted!",
-                  "Your order has been deleted.",
-                  "success"
-                );
-              } else {
-                console.log("Failed to delete order");
-              }
-            });
+          axiosPublic.delete(`/request/${_id}`).then((response) => {
+            if (response.status === 200) {
+              const remaining = myItems.filter((ord) => ord._id !== _id);
+              setMyItems(remaining);
+              Swal.fire("Deleted!", "Your order has been deleted.", "success");
+            } else {
+              console.log("Failed to delete order");
+            }
+          });
         }
       })
       .catch((error) => {

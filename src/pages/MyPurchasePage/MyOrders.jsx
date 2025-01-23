@@ -5,16 +5,18 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import MyOrderCard from "./MyOrderCard";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
 
-  const url = `https://foodie-app-backend-production.up.railway.app/myOrders/${user.email}`;
+  // const url = `http://localhost:5000/myOrders/${user.email}`;
   useEffect(() => {
-    axios
-      .get(url)
+    axiosPublic
+      .get(`/myOrders/${user.email}`)
       .then((response) => {
         setLoading(false);
         setOrders(response.data);
@@ -22,7 +24,7 @@ const MyOrders = () => {
       .catch((error) => {
         console.log("Error occurred during fetching your request", error);
       });
-  }, [url]);
+  }, [user.email, axiosPublic]);
 
   const handleDeleteOrder = (_id) => {
     // const proceed = confirm("Are You sure you want to delete");
@@ -51,23 +53,15 @@ const MyOrders = () => {
     })
       .then((result) => {
         if (result.isConfirmed) {
-          axios
-            .delete(
-              `https://foodie-app-backend-production.up.railway.app/order/${_id}`
-            )
-            .then((response) => {
-              if (response.status === 200) {
-                const remaining = orders.filter((ord) => ord._id !== _id);
-                setOrders(remaining);
-                Swal.fire(
-                  "Deleted!",
-                  "Your order has been deleted.",
-                  "success"
-                );
-              } else {
-                console.log("Failed to delete order");
-              }
-            });
+          axiosPublic.delete(`/order/${_id}`).then((response) => {
+            if (response.status === 200) {
+              const remaining = orders.filter((ord) => ord._id !== _id);
+              setOrders(remaining);
+              Swal.fire("Deleted!", "Your order has been deleted.", "success");
+            } else {
+              console.log("Failed to delete order");
+            }
+          });
         }
       })
       .catch((error) => {

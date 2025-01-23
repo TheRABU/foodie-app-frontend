@@ -36,9 +36,7 @@ export const router = createBrowserRouter([
         path: "/single-food/:id",
         element: <SingleFoodPage />,
         loader: ({ params }) =>
-          fetch(
-            `https://foodie-app-backend-production.up.railway.app/api/foods/${params.id}`
-          ),
+          fetch(`${import.meta.env.VITE_API_URL}/api/foods/${params.id}`),
       },
       {
         path: "/purchase/:id",
@@ -48,9 +46,7 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(
-            `https://foodie-app-backend-production.up.railway.app/api/foods/${params.id}`
-          ),
+          fetch(`${import.meta.env.VITE_API_URL}/api/foods/${params.id}`),
       },
       {
         path: "/sign-up",

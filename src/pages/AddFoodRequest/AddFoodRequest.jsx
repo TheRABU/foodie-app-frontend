@@ -1,13 +1,17 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthenticateProvider";
 import { Helmet } from "react-helmet-async";
-import axios from "axios";
+
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const AddFoodRequest = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
+
+  // Add request handler function
   const handleAddRequest = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -22,11 +26,8 @@ const AddFoodRequest = () => {
       foodName,
       description,
     };
-    axios
-      .post(
-        "https://foodie-app-backend-production.up.railway.app/addRequest",
-        customRequest
-      )
+    axiosPublic
+      .post("/addRequest", customRequest)
       .then((response) => {
         if (response.data.insertedId) {
           Swal.fire({

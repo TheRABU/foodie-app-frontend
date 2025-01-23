@@ -8,12 +8,14 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import LoadFoodReviewCard from "./LoadFoodReviewCard";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const SingleFoodPage = () => {
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
+
   const foodData = useLoaderData();
   const [singleFood, setSingleFood] = useState(foodData);
   const [userReviews, setUserReviews] = useState([]);
+  const axiosPublic = useAxiosPublic();
   const {
     _id,
     FoodName,
@@ -39,12 +41,10 @@ const SingleFoodPage = () => {
   //   fetchData();
   // }, []);
 
-  const url = `https://foodie-bite.sifatulrabbi.com/foodReview/${_id}`;
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(url);
+        const res = await axiosPublic.get(`/foodReview/${_id}`);
         setUserReviews(res.data);
       } catch (err) {
         console.error("Got an error:", err.response?.data);
@@ -62,7 +62,7 @@ const SingleFoodPage = () => {
 
     AOS.init();
     AOS.refresh();
-  }, [url]);
+  }, [axiosPublic, _id]);
 
   // post review
   const addReview = async (e) => {
@@ -84,10 +84,7 @@ const SingleFoodPage = () => {
     };
 
     try {
-      const res = await axios.post(
-        "https://foodie-bite.sifatulrabbi.com/addFoodReview",
-        payload
-      );
+      const res = await axiosPublic.post("/addFoodReview", payload);
       if (res.data.insertedId) {
         Swal.fire({
           position: "top-center",

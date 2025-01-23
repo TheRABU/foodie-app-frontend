@@ -1,19 +1,20 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthenticateProvider";
-import axios from "axios";
+
 import GalleryCard from "./GalleryCard";
 import { Helmet } from "react-helmet-async";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const OurGallery = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
-  const url =
-    "https://foodie-app-backend-production.up.railway.app/allClientReviews";
+  const axiosPublic = useAxiosPublic();
+  // const url = "http://localhost:5000/allClientReviews";
   useEffect(() => {
-    axios
-      .get(url)
+    axiosPublic
+      .get("/allClientReviews")
       .then((res) => {
         setReviews(res.data);
       })
@@ -30,7 +31,7 @@ const OurGallery = () => {
 
     AOS.init();
     AOS.refresh();
-  }, [url]);
+  }, [axiosPublic]);
 
   return (
     <>

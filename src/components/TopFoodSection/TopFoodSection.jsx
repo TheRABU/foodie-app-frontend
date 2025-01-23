@@ -8,10 +8,9 @@ const TopFoodSection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://foodie-app-backend-production.up.railway.app/api/foods")
+    fetch(`${import.meta.env.VITE_API_URL}/api/foods`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("Response from backend", data);
         setFoodItems(data);
 
         setLoading(false);
