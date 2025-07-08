@@ -8,7 +8,7 @@ const TopFoodSection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/foods`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/v1/foods`)
       .then((res) => res.json())
       .then((data) => {
         setFoodItems(data);

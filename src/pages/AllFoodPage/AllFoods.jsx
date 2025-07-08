@@ -1,10 +1,10 @@
-import { Link, NavLink, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { useEffect, useState } from "react";
 import FoodCollectionCard from "./FoodCollectionGrid/FoodCollectionCard";
 import Skeleton from "../../components/Skeleton/Skeleton";
-import axios from "axios";
+
 import { Helmet } from "react-helmet-async";
-import AOS from "aos";
+
 import "aos/dist/aos.css";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 const AllFoods = () => {
@@ -17,7 +17,7 @@ const AllFoods = () => {
   useEffect(() => {
     const fetchInitialFoods = async () => {
       try {
-        const response = await axiosPublic.get("/api/foods");
+        const response = await axiosPublic.get("/api/v1/foods");
         setFoods(response.data);
       } catch (error) {
         console.error("Error fetching initial foods:", error);
@@ -45,7 +45,7 @@ const AllFoods = () => {
     setLoading(true);
     try {
       const response = await axiosPublic.get(
-        `/api/foods?search=${searchValue}`
+        `/api/v1/foods?search=${searchValue}`
       );
       setFoods(response.data);
     } catch (error) {

@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthenticateProvider";
 
-import axios from "axios";
 import Swal from "sweetalert2";
 import MyOrderCard from "./MyOrderCard";
 import { Helmet } from "react-helmet-async";
@@ -16,10 +15,10 @@ const MyOrders = () => {
   // const url = `http://localhost:5000/myOrders/${user.email}`;
   useEffect(() => {
     axiosPublic
-      .get(`/myOrders/${user.email}`)
+      .get(`/api/v1/my-order/${user.email}`)
       .then((response) => {
         setLoading(false);
-        setOrders(response.data);
+        setOrders(response.data.result);
       })
       .catch((error) => {
         console.log("Error occurred during fetching your request", error);
@@ -53,7 +52,7 @@ const MyOrders = () => {
     })
       .then((result) => {
         if (result.isConfirmed) {
-          axiosPublic.delete(`/order/${_id}`).then((response) => {
+          axiosPublic.delete(`/api/v1/foods/${_id}`).then((response) => {
             if (response.status === 200) {
               const remaining = orders.filter((ord) => ord._id !== _id);
               setOrders(remaining);
@@ -79,6 +78,11 @@ const MyOrders = () => {
       </div>
     );
   }
+  if (orders.length < 0) {
+    return (
+      <div>sorry could not get your orders at the moment please try later.</div>
+    );
+  }
   return (
     <>
       <Helmet>
@@ -87,7 +91,7 @@ const MyOrders = () => {
       <div className="w-full px-5 h-full bg-[#ffffff]">
         <h2 className="text-center text-3xl "> My Ordered food items</h2>
         <section className="h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto px-3 lg:px-20">
-          {orders.map((order) => (
+          {orders?.map((order) => (
             // <div className="h-auto" key={order._id}>
             //   <div className="card bg-base-100 shadow-xl">
             //     <figure>
