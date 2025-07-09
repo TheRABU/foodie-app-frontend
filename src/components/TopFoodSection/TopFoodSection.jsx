@@ -11,7 +11,7 @@ const TopFoodSection = () => {
     fetch(`${import.meta.env.VITE_API_URL}/api/v1/foods`)
       .then((res) => res.json())
       .then((data) => {
-        setFoodItems(data);
+        setFoodItems(data.foods);
 
         setLoading(false);
       });

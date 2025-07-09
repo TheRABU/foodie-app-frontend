@@ -18,7 +18,7 @@ const AllFoods = () => {
     const fetchInitialFoods = async () => {
       try {
         const response = await axiosPublic.get("/api/v1/foods");
-        setFoods(response.data);
+        setFoods(response.data.foods);
       } catch (error) {
         console.error("Error fetching initial foods:", error);
       } finally {
@@ -47,7 +47,7 @@ const AllFoods = () => {
       const response = await axiosPublic.get(
         `/api/v1/foods?search=${searchValue}`
       );
-      setFoods(response.data);
+      setFoods(response.data.foods);
     } catch (error) {
       console.error("Error fetching search results:", error);
     } finally {
